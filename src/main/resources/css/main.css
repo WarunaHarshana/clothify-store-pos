@@ -326,3 +326,100 @@
 
 .products-table .table-row-cell:hover { -fx-background-color: #f9fafb; }
 .products-table .table-row-cell:selected { -fx-background-color: rgba(75,85,99,0.12); }
+
+/* ---------------- POS Form ---------------- */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 1);
+}
+
+.text-input {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8 10;
+}
+
+.text-input:focused {
+    -fx-border-color: #6b7280;
+}
+
+.pos-cat-tab {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #374151;
+    -fx-background-radius: 16;
+    -fx-padding: 6 14;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.pos-cat-tab:hover { -fx-background-color: #d1d5db; }
+.pos-cat-active { -fx-background-color: #4b5563; -fx-text-fill: white; }
+
+.pos-product-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0.15, 0, 1);
+    -fx-cursor: hand;
+}
+
+.pos-product-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0.2, 0, 2);
+}
+
+.top-item-name {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #1f2937;
+}
+
+.top-item-qty {
+    -fx-font-size: 11px;
+    -fx-text-fill: #6b7280;
+}
+
+.pos-add-btn {
+    -fx-background-color: #374151;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+}
+
+.pos-add-btn:hover { -fx-background-color: #4b5563; }
+
+.status-badge {
+    -fx-background-radius: 10;
+    -fx-padding: 2 8;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.status-pending {
+    -fx-background-color: #fef3c7;
+    -fx-text-fill: #92400e;
+}
+
+.filter-combo {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.pos-place-order-btn {
+    -fx-background-color: #10b981;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+
+.pos-place-order-btn:hover { -fx-background-color: #059669; }
+

@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 
 public class ProductFormController implements Initializable {
 
+    private static final String MSG_SELECT_PRODUCT = "Select a product first";
+    private static final String MSG_STOCK_FAILED = "Stock update failed";
+
     @FXML
     private TextField txtCode;
     @FXML
@@ -87,7 +90,7 @@ public class ProductFormController implements Initializable {
         try {
             Product selected = tblProducts.getSelectionModel().getSelectedItem();
             if (selected == null) {
-                new Alert(Alert.AlertType.WARNING, "Select a product first").show();
+                new Alert(Alert.AlertType.WARNING, MSG_SELECT_PRODUCT).show();
                 return;
             }
 
@@ -116,7 +119,7 @@ public class ProductFormController implements Initializable {
         try {
             Product selected = tblProducts.getSelectionModel().getSelectedItem();
             if (selected == null) {
-                new Alert(Alert.AlertType.WARNING, "Select a product first").show();
+                new Alert(Alert.AlertType.WARNING, MSG_SELECT_PRODUCT).show();
                 return;
             }
 
@@ -152,7 +155,7 @@ public class ProductFormController implements Initializable {
         try {
             Product selected = tblProducts.getSelectionModel().getSelectedItem();
             if (selected == null) {
-                new Alert(Alert.AlertType.WARNING, "Select a product first").show();
+                new Alert(Alert.AlertType.WARNING, MSG_SELECT_PRODUCT).show();
                 return;
             }
 
@@ -168,10 +171,10 @@ public class ProductFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION, "Stock updated").show();
                 loadTable();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Stock update failed").show();
+                new Alert(Alert.AlertType.ERROR, MSG_STOCK_FAILED).show();
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Stock update failed").show();
+            new Alert(Alert.AlertType.ERROR, MSG_STOCK_FAILED).show();
         }
     }
 
@@ -180,7 +183,7 @@ public class ProductFormController implements Initializable {
         try {
             Product selected = tblProducts.getSelectionModel().getSelectedItem();
             if (selected == null) {
-                new Alert(Alert.AlertType.WARNING, "Select a product first").show();
+                new Alert(Alert.AlertType.WARNING, MSG_SELECT_PRODUCT).show();
                 return;
             }
 
@@ -199,7 +202,7 @@ public class ProductFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Invalid quantity or insufficient stock").show();
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Stock update failed").show();
+            new Alert(Alert.AlertType.ERROR, MSG_STOCK_FAILED).show();
         }
     }
 

@@ -1,7 +1,5 @@
 package com.clothify.util;
 
-import lombok.experimental.UtilityClass;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.GeneralSecurityException;
@@ -11,11 +9,14 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
-@UtilityClass
-public class PasswordUtil {
+public final class PasswordUtil {
 
     private static final int ITERATIONS = 120000;
     private static final int KEY_LENGTH = 256;
+
+    private PasswordUtil() {
+        // utility class
+    }
 
     public static String hashPassword(String plainPassword) {
         try {

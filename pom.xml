@@ -79,6 +79,10 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>com.clothify/com.clothify.Starter</mainClass>
+                    <options>
+                        <option>--add-opens=java.base/java.lang=ALL-UNNAMED</option>
+                        <option>-XX:+IgnoreUnrecognizedVMOptions</option>
+                    </options>
                 </configuration>
             </plugin>
         </plugins>

@@ -9,6 +9,7 @@ module com.clothify {
 
     opens com.clothify to javafx.fxml;
     opens com.clothify.controller to javafx.fxml;
+    opens com.clothify.model to javafx.base;
 
     exports com.clothify;
     exports com.clothify.controller;

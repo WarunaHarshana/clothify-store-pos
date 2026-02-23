@@ -40,7 +40,7 @@ public class MainLayoutController {
     @FXML
     void handleNavProducts() { loadPage("/view/product_form.fxml", navProducts); }
     @FXML
-    void handleNavPOS() { loadPage("/view/module_placeholder.fxml", navPOS); }
+    void handleNavPOS() { loadPage("/view/pos_form.fxml", navPOS); }
     @FXML
     void handleNavOrders() { loadPage("/view/module_placeholder.fxml", navOrders); }
     @FXML
