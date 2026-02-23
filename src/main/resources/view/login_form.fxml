@@ -17,11 +17,18 @@
         <Label text="CLOTHIFY STORE" styleClass="brand-title"/>
         <Label text="Point of Sale System" styleClass="brand-subtitle"/>
 
-        <VBox spacing="6" padding="20 0 0 0">
+        <VBox spacing="6">
+            <padding>
+                <Insets top="20" right="0" bottom="0" left="0"/>
+            </padding>
             <Label text="USERNAME" styleClass="field-label"/>
             <TextField fx:id="txtUsername" promptText="Enter username" styleClass="form-input"/>
 
-            <Label text="PASSWORD" styleClass="field-label" padding="10 0 0 0"/>
+            <Label text="PASSWORD" styleClass="field-label">
+                <padding>
+                    <Insets top="10" right="0" bottom="0" left="0"/>
+                </padding>
+            </Label>
             <PasswordField fx:id="txtPassword" promptText="Enter password" styleClass="form-input"/>
 
             <Button text="SIGN IN" onAction="#btnLoginOnAction" maxWidth="1.7976931348623157E308"

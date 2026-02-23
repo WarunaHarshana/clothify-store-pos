@@ -145,3 +145,82 @@
     -fx-text-fill: #374151;
     -fx-font-weight: 700;
 }
+
+/* ---------------- Dashboard ---------------- */
+.dashboard-root {
+    -fx-background-color: #eef0f2;
+}
+
+.side-nav {
+    -fx-background-color: #3f4650;
+}
+
+.side-brand {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.side-sub {
+    -fx-text-fill: #d1d5db;
+    -fx-font-size: 11px;
+    -fx-padding: 0 0 12 2;
+}
+
+.side-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e5e7eb;
+    -fx-alignment: center-left;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
+    -fx-cursor: hand;
+}
+
+.side-btn:hover { -fx-background-color: #596170; }
+.side-btn-active { -fx-background-color: #6b7280; }
+.side-logout { -fx-background-color: #4b5563; }
+
+.dash-topbar {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #d1d5db transparent;
+}
+
+.dash-title {
+    -fx-text-fill: #374151;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.dash-user {
+    -fx-text-fill: #6b7280;
+    -fx-font-weight: 600;
+}
+
+.welcome-card,
+.kpi-card,
+.panel-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 1);
+}
+
+.welcome-title { -fx-font-size: 20px; -fx-font-weight: 700; -fx-text-fill: #1f2937; }
+.welcome-sub { -fx-font-size: 12px; -fx-text-fill: #6b7280; }
+.welcome-date { -fx-text-fill: #4b5563; -fx-font-weight: 600; }
+
+.kpi-label { -fx-font-size: 11px; -fx-text-fill: #6b7280; -fx-font-weight: 700; }
+.kpi-value { -fx-font-size: 24px; -fx-text-fill: #1f2937; -fx-font-weight: 700; }
+.kpi-trend { -fx-font-size: 12px; -fx-text-fill: #10b981; }
+.kpi-warning { -fx-font-size: 12px; -fx-text-fill: #f59e0b; }
+.kpi-danger { -fx-font-size: 12px; -fx-text-fill: #ef4444; }
+
+.panel-title { -fx-font-size: 16px; -fx-font-weight: 700; -fx-text-fill: #374151; -fx-padding: 0 0 8 0; }
+.chip {
+    -fx-background-color: #e5e7eb;
+    -fx-background-radius: 12;
+    -fx-padding: 6 10;
+    -fx-text-fill: #374151;
+    -fx-font-size: 12px;
+}
+.list-item { -fx-padding: 3 0; -fx-text-fill: #374151; }

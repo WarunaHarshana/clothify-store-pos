@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
@@ -19,12 +18,16 @@
     <top>
         <VBox styleClass="page-header" spacing="2">
             <Label text="Product Management" styleClass="page-header-title"/>
-            <Label text="Clothes Store POS - Inventory & Product Control" styleClass="page-subtitle"/>
+            <Label text="Clothes Store POS - Inventory and Product Control" styleClass="page-subtitle"/>
         </VBox>
     </top>
 
     <center>
-        <VBox spacing="14" padding="16">
+        <VBox spacing="14">
+            <padding>
+                <Insets top="16" right="16" bottom="16" left="16"/>
+            </padding>
+
             <VBox styleClass="toolbar-card" spacing="10">
                 <HBox spacing="10">
                     <TextField fx:id="txtCode" promptText="Code" prefWidth="120" styleClass="form-input"/>
@@ -46,14 +49,14 @@
                 </HBox>
             </VBox>
 
-            <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
-                <TableView fx:id="tblProducts" VBox.vgrow="ALWAYS">
+            <VBox styleClass="table-card">
+                <TableView fx:id="tblProducts" prefHeight="470" prefWidth="1040">
                     <columns>
-                        <TableColumn fx:id="colId" prefWidth="90" text="ID" />
-                        <TableColumn fx:id="colCode" prefWidth="160" text="Code" />
-                        <TableColumn fx:id="colName" prefWidth="360" text="Name" />
-                        <TableColumn fx:id="colPrice" prefWidth="170" text="Price" />
-                        <TableColumn fx:id="colQty" prefWidth="170" text="Qty" />
+                        <TableColumn fx:id="colId" prefWidth="90" text="ID"/>
+                        <TableColumn fx:id="colCode" prefWidth="160" text="Code"/>
+                        <TableColumn fx:id="colName" prefWidth="360" text="Name"/>
+                        <TableColumn fx:id="colPrice" prefWidth="170" text="Price"/>
+                        <TableColumn fx:id="colQty" prefWidth="170" text="Qty"/>
                     </columns>
                 </TableView>
             </VBox>

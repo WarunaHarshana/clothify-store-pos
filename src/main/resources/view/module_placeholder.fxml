@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700" prefWidth="1100"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.clothify.controller.ModulePlaceholderController"
+            styleClass="product-root" stylesheets="@../css/main.css">
+
+    <center>
+        <VBox alignment="CENTER" spacing="12">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Label fx:id="lblTitle" text="Module" styleClass="page-header-title"/>
+            <Label text="This screen UI implementation is in progress." styleClass="page-subtitle"/>
+            <Button text="Back to Dashboard" onAction="#btnBackToDashboardOnAction" styleClass="action-btn btn-search"/>
+        </VBox>
+    </center>
+
+</BorderPane>

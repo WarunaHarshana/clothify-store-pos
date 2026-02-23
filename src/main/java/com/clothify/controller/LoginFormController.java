@@ -44,10 +44,11 @@ public class LoginFormController {
 
             lblMessage.setText("");
             Stage stage = (Stage) txtUsername.getScene().getWindow();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/product_form.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"))));
             stage.centerOnScreen();
         } catch (Exception e) {
-            lblMessage.setText("Login failed");
+            e.printStackTrace();
+            lblMessage.setText("Login failed: " + e.getMessage());
         }
     }
 }
