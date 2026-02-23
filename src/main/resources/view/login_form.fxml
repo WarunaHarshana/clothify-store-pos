@@ -5,25 +5,33 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="12.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.clothify.controller.LoginFormController" prefHeight="420.0" prefWidth="620.0"
-      styleClass="root" stylesheets="@../css/main.css">
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.clothify.controller.LoginFormController"
+           prefHeight="520.0" prefWidth="900.0"
+           styleClass="login-bg" stylesheets="@../css/main.css">
+
+    <VBox alignment="CENTER" maxWidth="420" spacing="12" styleClass="login-card">
+        <Label text="CLOTHIFY STORE" styleClass="brand-title"/>
+        <Label text="Point of Sale System" styleClass="brand-subtitle"/>
+
+        <VBox spacing="6" padding="20 0 0 0">
+            <Label text="USERNAME" styleClass="field-label"/>
+            <TextField fx:id="txtUsername" promptText="Enter username" styleClass="form-input"/>
+
+            <Label text="PASSWORD" styleClass="field-label" padding="10 0 0 0"/>
+            <PasswordField fx:id="txtPassword" promptText="Enter password" styleClass="form-input"/>
+
+            <Button text="SIGN IN" onAction="#btnLoginOnAction" maxWidth="1.7976931348623157E308"
+                    prefHeight="42" styleClass="login-button"/>
+
+            <Label fx:id="lblMessage" styleClass="message-label"/>
+        </VBox>
+    </VBox>
+
     <padding>
         <Insets top="24" right="24" bottom="24" left="24"/>
     </padding>
-
-    <Label text="Clothify Store POS">
-        <font>
-            <Font size="24"/>
-        </font>
-    </Label>
-
-    <TextField fx:id="txtUsername" promptText="Username" maxWidth="260"/>
-    <PasswordField fx:id="txtPassword" promptText="Password" maxWidth="260"/>
-
-    <Button text="Login" onAction="#btnLoginOnAction" maxWidth="260"/>
-    <Label fx:id="lblMessage"/>
-</VBox>
+</StackPane>

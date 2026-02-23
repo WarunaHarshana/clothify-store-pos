@@ -1,20 +1,147 @@
 .root {
-    -fx-background-color: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+    -fx-font-family: "Segoe UI";
 }
 
-.label {
-    -fx-text-fill: #0f172a;
+/* ---------------- Login ---------------- */
+.login-bg {
+    -fx-background-color: linear-gradient(to bottom right, #2f343a, #5c6570);
+}
+
+.login-card {
+    -fx-background-color: #f5f6f7;
+    -fx-background-radius: 16;
+    -fx-padding: 28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 22, 0.25, 0, 6);
+}
+
+.brand-title {
+    -fx-text-fill: #2c3138;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+.brand-subtitle {
+    -fx-text-fill: #6b7280;
+    -fx-font-size: 12px;
+}
+
+.field-label {
+    -fx-text-fill: #4b5563;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
 }
 
 .text-field,
 .password-field {
-    -fx-background-radius: 8;
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
     -fx-border-radius: 8;
-    -fx-border-color: #cbd5e1;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
 }
 
-.button {
-    -fx-background-color: #1d4ed8;
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #6b7280;
+    -fx-effect: dropshadow(gaussian, rgba(107,114,128,0.25), 8, 0.2, 0, 0);
+}
+
+.login-button {
+    -fx-background-color: #374151;
     -fx-text-fill: white;
     -fx-background-radius: 8;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #4b5563;
+}
+
+.message-label {
+    -fx-text-fill: #dc2626;
+    -fx-font-size: 12px;
+}
+
+/* ---------------- Product Form ---------------- */
+.product-root {
+    -fx-background-color: #eef0f2;
+}
+
+.page-header {
+    -fx-background-color: #3f4650;
+    -fx-padding: 14 18;
+}
+
+.page-header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.page-subtitle {
+    -fx-text-fill: #d1d5db;
+    -fx-font-size: 12px;
+}
+
+.toolbar-card,
+.table-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.18, 0, 2);
+}
+
+.form-input {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8 10;
+}
+
+.form-input:focused {
+    -fx-border-color: #6b7280;
+}
+
+.action-btn {
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.btn-add { -fx-background-color: #374151; }
+.btn-update { -fx-background-color: #4b5563; }
+.btn-delete { -fx-background-color: #6b7280; }
+.btn-stock-in { -fx-background-color: #10b981; }
+.btn-stock-out { -fx-background-color: #ef4444; }
+.btn-search { -fx-background-color: #4b5563; }
+.btn-reload { -fx-background-color: #6b7280; }
+
+.action-btn:hover {
+    -fx-opacity: 0.92;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #e5e7eb;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 36;
+    -fx-border-color: transparent transparent #d1d5db transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #374151;
+    -fx-font-weight: 700;
 }
