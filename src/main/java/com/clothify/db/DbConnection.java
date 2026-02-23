@@ -1,8 +1,10 @@
 package com.clothify.db;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class DbConnection {
@@ -14,14 +16,19 @@ public class DbConnection {
     }
 
     public static DbConnection getInstance() {
-        return instance == null ? (instance = new DbConnection()) : instance;
+        if (instance == null) {
+            instance = new DbConnection();
+        }
+        return instance;
     }
 
-    public Connection getConnection() throws Exception {
+    public Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
         if (connection == null || connection.isClosed()) {
             Properties props = new Properties();
             try (InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties")) {
-                if (input == null) throw new RuntimeException("db.properties not found");
+                if (input == null) {
+                    throw new IOException("db.properties not found on classpath");
+                }
                 props.load(input);
             }
             Class.forName(props.getProperty("db.driver"));
