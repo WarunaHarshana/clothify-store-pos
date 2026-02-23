@@ -1,4 +1,4 @@
-package db;
+package com.clothify.db;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -34,3 +34,4 @@ public class DbConnection {
         return connection;
     }
 }
+

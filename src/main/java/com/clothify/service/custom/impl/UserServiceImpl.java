@@ -1,16 +1,18 @@
-package service.custom.impl;
+package com.clothify.service.custom.impl;
 
-import model.User;
-import repository.custom.UserRepository;
-import repository.custom.impl.UserRepositoryImpl;
-import service.custom.UserService;
-import util.PasswordUtil;
+import com.clothify.model.User;
+import com.clothify.repository.custom.UserRepository;
+import com.clothify.repository.custom.impl.UserRepositoryImpl;
+import com.clothify.service.custom.UserService;
+import com.clothify.util.PasswordUtil;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.SQLException;
 
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository = new UserRepositoryImpl();
+    private final UserRepository userRepository;
 
     @Override
     public User authenticate(String username, String password) throws SQLException {
@@ -20,3 +22,4 @@ public class UserServiceImpl implements UserService {
         return PasswordUtil.verifyPassword(password, user.getPasswordHash()) ? user : null;
     }
 }
+

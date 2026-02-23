@@ -1,4 +1,4 @@
-package controller;
+package com.clothify.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,9 +6,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.User;
-import service.custom.UserService;
-import service.custom.impl.UserServiceImpl;
+import com.clothify.model.User;
+import com.clothify.repository.custom.impl.UserRepositoryImpl;
+import com.clothify.service.custom.UserService;
+import com.clothify.service.custom.impl.UserServiceImpl;
 
 public class LoginFormController {
 
@@ -21,7 +22,7 @@ public class LoginFormController {
     @FXML
     private Label lblMessage;
 
-    private final UserService userService = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl(new UserRepositoryImpl());
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
@@ -48,3 +49,4 @@ public class LoginFormController {
         }
     }
 }
+

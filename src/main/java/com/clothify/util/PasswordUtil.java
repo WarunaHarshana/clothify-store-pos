@@ -1,4 +1,6 @@
-package util;
+package com.clothify.util;
+
+import lombok.experimental.UtilityClass;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -6,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+@UtilityClass
 public class PasswordUtil {
 
     private static final int ITERATIONS = 120000;
@@ -43,3 +46,4 @@ public class PasswordUtil {
         return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
     }
 }
+

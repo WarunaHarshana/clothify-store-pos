@@ -1,8 +1,8 @@
-package repository.custom.impl;
+package com.clothify.repository.custom.impl;
 
-import db.DbConnection;
-import model.User;
-import repository.custom.UserRepository;
+import com.clothify.db.DbConnection;
+import com.clothify.model.User;
+import com.clothify.repository.custom.UserRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,3 +35,4 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 }
+
