@@ -44,7 +44,7 @@ public class LoginFormController {
 
             lblMessage.setText("");
             Stage stage = (Stage) txtUsername.getScene().getWindow();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/main_layout.fxml"))));
             stage.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();

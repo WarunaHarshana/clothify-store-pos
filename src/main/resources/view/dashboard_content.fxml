@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="14" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" styleClass="product-root">
+    <padding><Insets top="16" right="18" bottom="18" left="18"/></padding>
+
+    <HBox spacing="12" styleClass="welcome-card">
+        <VBox>
+            <Label text="Welcome back, Admin" styleClass="welcome-title"/>
+            <Label text="Here's what is happening with your store today" styleClass="welcome-sub"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="Feb 23, 2026" styleClass="welcome-date"/>
+    </HBox>
+
+    <GridPane hgap="12" vgap="12">
+        <VBox styleClass="kpi-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="TODAY SALES" styleClass="kpi-label"/>
+            <Label text="Rs. 45,200" styleClass="kpi-value"/>
+            <Label text="+12% from yesterday" styleClass="kpi-trend"/>
+        </VBox>
+        <VBox styleClass="kpi-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="TOTAL PRODUCTS" styleClass="kpi-label"/>
+            <Label text="1,234" styleClass="kpi-value"/>
+            <Label text="5 new added" styleClass="kpi-trend"/>
+        </VBox>
+        <VBox styleClass="kpi-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <Label text="LOW STOCK" styleClass="kpi-label"/>
+            <Label text="23" styleClass="kpi-value"/>
+            <Label text="Needs attention" styleClass="kpi-warning"/>
+        </VBox>
+        <VBox styleClass="kpi-card" GridPane.columnIndex="3" GridPane.rowIndex="0">
+            <Label text="PENDING ORDERS" styleClass="kpi-label"/>
+            <Label text="8" styleClass="kpi-value"/>
+            <Label text="3 new today" styleClass="kpi-danger"/>
+        </VBox>
+    </GridPane>
+
+    <HBox spacing="12">
+        <VBox styleClass="panel-card" prefWidth="720">
+            <Label text="Sales Overview" styleClass="panel-title"/>
+            <FlowPane hgap="8" vgap="8">
+                <Label text="Mon: 32K" styleClass="chip"/>
+                <Label text="Tue: 24K" styleClass="chip"/>
+                <Label text="Wed: 42K" styleClass="chip"/>
+                <Label text="Thu: 30K" styleClass="chip"/>
+                <Label text="Fri: 48K" styleClass="chip"/>
+                <Label text="Sat: 52K" styleClass="chip"/>
+                <Label text="Sun: 45K" styleClass="chip"/>
+            </FlowPane>
+        </VBox>
+
+        <VBox styleClass="panel-card" prefWidth="360">
+            <Label text="Top Selling Items" styleClass="panel-title"/>
+            <Label text="1. Slim Fit T-Shirt - 145" styleClass="list-item"/>
+            <Label text="2. Classic Denim Jeans - 98" styleClass="list-item"/>
+            <Label text="3. Summer Floral Dress - 76" styleClass="list-item"/>
+            <Label text="4. Winter Jacket - 54" styleClass="list-item"/>
+            <Label text="5. Formal Shirt - 42" styleClass="list-item"/>
+        </VBox>
+    </HBox>
+</VBox>

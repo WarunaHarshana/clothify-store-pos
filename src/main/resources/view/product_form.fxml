@@ -6,61 +6,58 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="1100.0"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.clothify.controller.ProductFormController"
-            styleClass="product-root" stylesheets="@../css/main.css">
+            styleClass="page-container" stylesheets="@../css/main.css">
+    <children>
+        <VBox spacing="14" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16"
+              AnchorPane.topAnchor="16" AnchorPane.bottomAnchor="16">
 
-    <top>
-        <VBox styleClass="page-header" spacing="2">
-            <Label text="Product Management" styleClass="page-header-title"/>
-            <Label text="Clothes Store POS - Inventory and Product Control" styleClass="page-subtitle"/>
-        </VBox>
-    </top>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Product Management" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Stock +" onAction="#btnStockInOnAction" styleClass="btn-success"/>
+                <Button text="Stock -" onAction="#btnStockOutOnAction" styleClass="btn-danger"/>
+            </HBox>
 
-    <center>
-        <VBox spacing="14">
-            <padding>
-                <Insets top="16" right="16" bottom="16" left="16"/>
-            </padding>
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="filter-bar">
+                <TextField fx:id="txtSearch" promptText="Search by code or name..."
+                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
+                <Button text="Search" onAction="#btnSearchOnAction" styleClass="btn-secondary"/>
+                <Button text="Reload" onAction="#btnReloadOnAction" styleClass="btn-secondary"/>
+            </HBox>
 
-            <VBox styleClass="toolbar-card" spacing="10">
-                <HBox spacing="10">
-                    <TextField fx:id="txtCode" promptText="Code" prefWidth="120" styleClass="form-input"/>
-                    <TextField fx:id="txtName" promptText="Name" prefWidth="220" styleClass="form-input"/>
-                    <TextField fx:id="txtPrice" promptText="Price" prefWidth="140" styleClass="form-input"/>
-                    <TextField fx:id="txtQty" promptText="Qty" prefWidth="110" styleClass="form-input"/>
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="card">
+                <TextField fx:id="txtCode" promptText="Code" prefWidth="130" styleClass="text-input"/>
+                <TextField fx:id="txtName" promptText="Name" prefWidth="230" styleClass="text-input"/>
+                <TextField fx:id="txtPrice" promptText="Price" prefWidth="140" styleClass="text-input"/>
+                <TextField fx:id="txtQty" promptText="Qty" prefWidth="100" styleClass="text-input"/>
 
-                    <Button text="Add" onAction="#btnAddOnAction" styleClass="action-btn btn-add"/>
-                    <Button text="Update" onAction="#btnUpdateOnAction" styleClass="action-btn btn-update"/>
-                    <Button text="Delete" onAction="#btnDeleteOnAction" styleClass="action-btn btn-delete"/>
-                    <Button text="Stock +" onAction="#btnStockInOnAction" styleClass="action-btn btn-stock-in"/>
-                    <Button text="Stock -" onAction="#btnStockOutOnAction" styleClass="action-btn btn-stock-out"/>
-                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Add" onAction="#btnAddOnAction" styleClass="btn-primary"/>
+                <Button text="Update" onAction="#btnUpdateOnAction" styleClass="btn-secondary"/>
+                <Button text="Delete" onAction="#btnDeleteOnAction" styleClass="btn-danger"/>
+            </HBox>
 
-                <HBox spacing="10">
-                    <TextField fx:id="txtSearch" promptText="Search by code or name" prefWidth="360" styleClass="form-input"/>
-                    <Button text="Search" onAction="#btnSearchOnAction" styleClass="action-btn btn-search"/>
-                    <Button text="Reload" onAction="#btnReloadOnAction" styleClass="action-btn btn-reload"/>
-                </HBox>
-            </VBox>
-
-            <VBox styleClass="table-card">
-                <TableView fx:id="tblProducts" prefHeight="470" prefWidth="1040">
+            <VBox VBox.vgrow="ALWAYS" styleClass="card">
+                <TableView fx:id="tblProducts" VBox.vgrow="ALWAYS" styleClass="products-table">
                     <columns>
-                        <TableColumn fx:id="colId" prefWidth="90" text="ID"/>
+                        <TableColumn fx:id="colId" prefWidth="80" text="ID"/>
                         <TableColumn fx:id="colCode" prefWidth="160" text="Code"/>
                         <TableColumn fx:id="colName" prefWidth="360" text="Name"/>
-                        <TableColumn fx:id="colPrice" prefWidth="170" text="Price"/>
-                        <TableColumn fx:id="colQty" prefWidth="170" text="Qty"/>
+                        <TableColumn fx:id="colPrice" prefWidth="180" text="Price"/>
+                        <TableColumn fx:id="colQty" prefWidth="120" text="Qty"/>
                     </columns>
+                    <placeholder>
+                        <Label text="No products found. Add a product to get started." style="-fx-text-fill: #9ca3af;"/>
+                    </placeholder>
                 </TableView>
             </VBox>
         </VBox>
-    </center>
-
-</BorderPane>
+    </children>
+</AnchorPane>

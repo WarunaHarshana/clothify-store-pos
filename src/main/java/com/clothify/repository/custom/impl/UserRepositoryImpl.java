@@ -14,12 +14,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findByUsername(String username) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ? AND is_active = TRUE";
-
         try (Connection connection = DbConnection.getInstance().getConnection();
              PreparedStatement pstm = connection.prepareStatement(sql)) {
-
             pstm.setString(1, username);
-
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
                     User user = new User();
@@ -32,7 +29,6 @@ public class UserRepositoryImpl implements UserRepository {
                     return user;
                 }
             }
-
             return null;
         } catch (Exception e) {
             throw new SQLException(e);

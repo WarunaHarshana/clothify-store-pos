@@ -12,64 +12,76 @@ public class DashboardFormController {
 
     @FXML
     void btnProductsOnAction(ActionEvent event) {
-        switchScene(event, "/view/product_form.fxml");
+        openModuleWindow(event, "/view/product_form.fxml", "Products");
     }
 
     @FXML
     void btnPosOnAction(ActionEvent event) {
-        openPlaceholder(event, "Point of Sale");
+        openPlaceholderWindow(event, "Point of Sale");
     }
 
     @FXML
     void btnOrdersOnAction(ActionEvent event) {
-        openPlaceholder(event, "Orders");
+        openPlaceholderWindow(event, "Orders");
     }
 
     @FXML
     void btnInventoryOnAction(ActionEvent event) {
-        openPlaceholder(event, "Inventory");
+        openPlaceholderWindow(event, "Inventory");
     }
 
     @FXML
     void btnSuppliersOnAction(ActionEvent event) {
-        openPlaceholder(event, "Suppliers");
+        openPlaceholderWindow(event, "Suppliers");
     }
 
     @FXML
     void btnEmployeesOnAction(ActionEvent event) {
-        openPlaceholder(event, "Employees");
+        openPlaceholderWindow(event, "Employees");
     }
 
     @FXML
     void btnReportsOnAction(ActionEvent event) {
-        openPlaceholder(event, "Reports");
+        openPlaceholderWindow(event, "Reports");
     }
 
     @FXML
     void btnSettingsOnAction(ActionEvent event) {
-        openPlaceholder(event, "Settings");
+        openPlaceholderWindow(event, "Settings");
     }
 
-    private void openPlaceholder(ActionEvent event, String title) {
+    private void openPlaceholderWindow(ActionEvent event, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/module_placeholder.fxml"));
             Parent root = loader.load();
             ModulePlaceholderController controller = loader.getController();
             controller.setTitle(title);
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.centerOnScreen();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage moduleStage = new Stage();
+            moduleStage.setTitle(title + " - Clothify Store POS");
+            moduleStage.setScene(new Scene(root));
+            moduleStage.setMaximized(true);
+            moduleStage.show();
+
+            currentStage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void switchScene(ActionEvent event, String fxml) {
+    private void openModuleWindow(ActionEvent event, String fxml, String title) {
         try {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxml))));
-            stage.centerOnScreen();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+
+            Stage moduleStage = new Stage();
+            moduleStage.setTitle(title + " - Clothify Store POS");
+            moduleStage.setScene(new Scene(root));
+            moduleStage.setMaximized(true);
+            moduleStage.show();
+
+            currentStage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
