@@ -10,3 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO users (username, password_hash, full_name, role)
+SELECT 'admin', 'admin123', 'System Admin', 'ADMIN'
+WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'admin');
