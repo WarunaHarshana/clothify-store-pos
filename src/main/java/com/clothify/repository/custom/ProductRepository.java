@@ -11,5 +11,6 @@ public interface ProductRepository {
     boolean save(Product product) throws SQLException;
     boolean update(Product product) throws SQLException;
     boolean delete(int productId) throws SQLException;
+    boolean updateQuantity(int productId, int newQuantity) throws SQLException;
     String generateNextCode() throws SQLException;
 }

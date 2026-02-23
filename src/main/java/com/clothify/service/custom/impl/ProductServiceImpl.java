@@ -38,6 +38,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public boolean addStock(int productId, int qty) throws SQLException {
+        Product product = getAllProducts().stream()
+                .filter(p -> p.getProductId() == productId)
+                .findFirst()
+                .orElse(null);
+        if (product == null || qty <= 0) return false;
+        return productRepository.updateQuantity(productId, product.getQuantity() + qty);
+    }
+
+    @Override
+    public boolean reduceStock(int productId, int qty) throws SQLException {
+        Product product = getAllProducts().stream()
+                .filter(p -> p.getProductId() == productId)
+                .findFirst()
+                .orElse(null);
+        if (product == null || qty <= 0) return false;
+        int newQty = product.getQuantity() - qty;
+        if (newQty < 0) return false;
+        return productRepository.updateQuantity(productId, newQty);
+    }
+
+    @Override
     public String generateNextCode() throws SQLException {
         return productRepository.generateNextCode();
     }

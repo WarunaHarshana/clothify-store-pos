@@ -11,5 +11,7 @@ public interface ProductService {
     boolean addProduct(Product product) throws SQLException;
     boolean updateProduct(Product product) throws SQLException;
     boolean deleteProduct(int productId) throws SQLException;
+    boolean addStock(int productId, int qty) throws SQLException;
+    boolean reduceStock(int productId, int qty) throws SQLException;
     String generateNextCode() throws SQLException;
 }

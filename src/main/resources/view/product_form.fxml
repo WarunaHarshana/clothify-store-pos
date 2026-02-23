@@ -18,9 +18,12 @@
         <TextField fx:id="txtPrice" layoutX="410" layoutY="70" prefWidth="140" promptText="Price" />
         <TextField fx:id="txtQty" layoutX="565" layoutY="70" prefWidth="120" promptText="Qty" />
 
-        <Button layoutX="700" layoutY="70" mnemonicParsing="false" onAction="#btnAddOnAction" text="Add" />
-        <Button layoutX="750" layoutY="70" mnemonicParsing="false" onAction="#btnUpdateOnAction" text="Update" />
-        <Button layoutX="818" layoutY="70" mnemonicParsing="false" onAction="#btnDeleteOnAction" text="Delete" />
+        <Button layoutX="680" layoutY="70" mnemonicParsing="false" onAction="#btnAddOnAction" text="Add" />
+        <Button layoutX="725" layoutY="70" mnemonicParsing="false" onAction="#btnUpdateOnAction" text="Update" />
+        <Button layoutX="790" layoutY="70" mnemonicParsing="false" onAction="#btnDeleteOnAction" text="Delete" />
+        <Button layoutX="855" layoutY="70" mnemonicParsing="false" onAction="#btnStockInOnAction" text="Stock +" />
+
+        <Button layoutX="855" layoutY="118" mnemonicParsing="false" onAction="#btnStockOutOnAction" text="Stock -" />
 
         <TextField fx:id="txtSearch" layoutX="30" layoutY="118" prefWidth="365" promptText="Search by code or name" />
         <Button layoutX="410" layoutY="118" mnemonicParsing="false" onAction="#btnSearchOnAction" text="Search" />

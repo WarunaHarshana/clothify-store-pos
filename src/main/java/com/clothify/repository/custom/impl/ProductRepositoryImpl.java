@@ -95,6 +95,19 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    public boolean updateQuantity(int productId, int newQuantity) throws SQLException {
+        String sql = "UPDATE products SET quantity=? WHERE product_id=?";
+        try (Connection connection = DbConnection.getInstance().getConnection();
+             PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setInt(1, newQuantity);
+            pstm.setInt(2, productId);
+            return pstm.executeUpdate() > 0;
+        } catch (Exception e) {
+            throw new SQLException(e);
+        }
+    }
+
+    @Override
     public String generateNextCode() throws SQLException {
         String sql = "SELECT product_code FROM products ORDER BY product_id DESC LIMIT 1";
         try (Connection connection = DbConnection.getInstance().getConnection();

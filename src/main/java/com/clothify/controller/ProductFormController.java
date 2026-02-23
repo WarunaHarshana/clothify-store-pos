@@ -147,6 +147,62 @@ public class ProductFormController implements Initializable {
         loadTable();
     }
 
+    @FXML
+    void btnStockInOnAction() {
+        try {
+            Product selected = tblProducts.getSelectionModel().getSelectedItem();
+            if (selected == null) {
+                new Alert(Alert.AlertType.WARNING, "Select a product first").show();
+                return;
+            }
+
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Stock In");
+            dialog.setHeaderText("Enter quantity to add");
+            dialog.setContentText("Quantity:");
+            String input = dialog.showAndWait().orElse("").trim();
+            if (input.isEmpty()) return;
+
+            int qty = Integer.parseInt(input);
+            if (productService.addStock(selected.getProductId(), qty)) {
+                new Alert(Alert.AlertType.INFORMATION, "Stock updated").show();
+                loadTable();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Stock update failed").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Stock update failed").show();
+        }
+    }
+
+    @FXML
+    void btnStockOutOnAction() {
+        try {
+            Product selected = tblProducts.getSelectionModel().getSelectedItem();
+            if (selected == null) {
+                new Alert(Alert.AlertType.WARNING, "Select a product first").show();
+                return;
+            }
+
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Stock Out");
+            dialog.setHeaderText("Enter quantity to reduce");
+            dialog.setContentText("Quantity:");
+            String input = dialog.showAndWait().orElse("").trim();
+            if (input.isEmpty()) return;
+
+            int qty = Integer.parseInt(input);
+            if (productService.reduceStock(selected.getProductId(), qty)) {
+                new Alert(Alert.AlertType.INFORMATION, "Stock updated").show();
+                loadTable();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Invalid quantity or insufficient stock").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Stock update failed").show();
+        }
+    }
+
     private void loadTable() {
         try {
             tblProducts.setItems(FXCollections.observableArrayList(productService.getAllProducts()));
