@@ -7,10 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import com.clothify.model.User;
 import com.clothify.service.custom.UserService;
 import com.clothify.service.custom.impl.UserServiceImpl;
+import com.clothify.util.SessionManager;
 
 public class LoginFormController {
 
@@ -19,6 +21,9 @@ public class LoginFormController {
 
     @FXML
     private PasswordField txtPassword;
+
+    @FXML
+    private CheckBox chkRememberMe;
 
     @FXML
     private Label lblMessage;
@@ -43,8 +48,11 @@ public class LoginFormController {
             }
 
             lblMessage.setText("");
+            SessionManager.setCurrentUser(user);
             Stage stage = (Stage) txtUsername.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/main_layout.fxml"))));
+            stage.setResizable(true);
+            stage.setMaximized(true);
             stage.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,5 +60,3 @@ public class LoginFormController {
         }
     }
 }
-
-
