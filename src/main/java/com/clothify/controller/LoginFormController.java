@@ -14,7 +14,12 @@ import com.clothify.service.custom.UserService;
 import com.clothify.service.custom.impl.UserServiceImpl;
 import com.clothify.util.SessionManager;
 
-public class LoginFormController {
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
+public class LoginFormController implements Initializable {
 
     @FXML
     private TextField txtUsername;
@@ -29,6 +34,20 @@ public class LoginFormController {
     private Label lblMessage;
 
     private final UserService userService = new UserServiceImpl();
+    private Preferences prefs;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        prefs = Preferences.userNodeForPackage(LoginFormController.class);
+        String savedUsername = prefs.get("username", "");
+        String savedPassword = prefs.get("password", "");
+
+        if (!savedUsername.isEmpty() && !savedPassword.isEmpty()) {
+            txtUsername.setText(savedUsername);
+            txtPassword.setText(savedPassword);
+            chkRememberMe.setSelected(true);
+        }
+    }
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
@@ -49,6 +68,15 @@ public class LoginFormController {
 
             lblMessage.setText("");
             SessionManager.setCurrentUser(user);
+
+            if (chkRememberMe.isSelected()) {
+                prefs.put("username", username);
+                prefs.put("password", password);
+            } else {
+                prefs.remove("username");
+                prefs.remove("password");
+            }
+
             Stage stage = (Stage) txtUsername.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/main_layout.fxml"))));
             stage.setResizable(true);

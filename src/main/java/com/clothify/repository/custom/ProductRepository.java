@@ -13,4 +13,7 @@ public interface ProductRepository {
     boolean delete(int productId) throws SQLException;
     boolean updateQuantity(int productId, int newQuantity) throws SQLException;
     String generateNextCode() throws SQLException;
+    int getProductCount() throws SQLException;
+    int getLowStockCount() throws SQLException;
+    Product findById(int productId) throws SQLException;
 }

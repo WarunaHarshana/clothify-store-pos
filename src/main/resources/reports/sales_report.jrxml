@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              name="sales_report" pageWidth="595" pageHeight="842" columnWidth="535"
+              leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+
+    <style name="Title" fontName="SansSerif" fontSize="18" isBold="true" forecolor="#1E293B"/>
+    <style name="Header" fontName="SansSerif" fontSize="10" isBold="true" forecolor="#FFFFFF" backcolor="#1E293B" mode="Opaque"/>
+    <style name="DetailRow" mode="Transparent" fontName="SansSerif" fontSize="10" forecolor="#333333"/>
+
+    <parameter name="FROM_DATE" class="java.sql.Date"/>
+    <parameter name="TO_DATE" class="java.sql.Date"/>
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+    <parameter name="STORE_NAME" class="java.lang.String"/>
+
+    <queryString>
+        <![CDATA[
+        SELECT DATE(o.order_date) AS sale_date,
+               o.order_id,
+               COUNT(od.order_detail_id) AS item_count,
+               o.total_amount,
+               o.status
+        FROM orders o
+        LEFT JOIN order_details od ON o.order_id = od.order_id
+        WHERE DATE(o.order_date) >= $P{FROM_DATE} AND DATE(o.order_date) <= $P{TO_DATE}
+              AND o.status = 'COMPLETED'
+        GROUP BY o.order_id, DATE(o.order_date), o.total_amount, o.status
+        ORDER BY o.order_date DESC
+        ]]>
+    </queryString>
+
+    <field name="sale_date" class="java.sql.Date"/>
+    <field name="order_id" class="java.lang.Integer"/>
+    <field name="item_count" class="java.lang.Long"/>
+    <field name="total_amount" class="java.math.BigDecimal"/>
+    <field name="status" class="java.lang.String"/>
+
+    <variable name="GRAND_TOTAL" class="java.math.BigDecimal" calculation="Sum">
+        <variableExpression><![CDATA[$F{total_amount}]]></variableExpression>
+    </variable>
+
+    <title>
+        <band height="80">
+            <staticText>
+                <reportElement style="Title" x="0" y="0" width="535" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Clothify Store - Sales Report]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="35" width="535" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Period: " + new java.text.SimpleDateFormat("dd MMM yyyy").format($P{FROM_DATE}) + " - " + new java.text.SimpleDateFormat("dd MMM yyyy").format($P{TO_DATE})]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="25">
+            <staticText>
+                <reportElement style="Header" x="0" y="0" width="90" height="20"/>
+                <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="90" y="0" width="110" height="20"/>
+                <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                <text><![CDATA[Order ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="200" y="0" width="100" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Items]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="300" y="0" width="120" height="20"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><paragraph rightIndent="5"/></textElement>
+                <text><![CDATA[Amount (Rs.)]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="420" y="0" width="115" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="18">
+            <frame>
+                <reportElement style="DetailRow" x="0" y="0" width="535" height="18"/>
+                <textField>
+                    <reportElement x="0" y="0" width="90" height="15"/>
+                    <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                    <textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yy").format($F{sale_date})]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="90" y="0" width="110" height="15"/>
+                    <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                    <textFieldExpression><![CDATA[String.valueOf($F{order_id})]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="200" y="0" width="100" height="15"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$F{item_count}]]></textFieldExpression>
+                </textField>
+                <textField pattern="#,##0.00">
+                    <reportElement x="300" y="0" width="120" height="15"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle"><paragraph rightIndent="5"/></textElement>
+                    <textFieldExpression><![CDATA[$F{total_amount}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="420" y="0" width="115" height="15"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </detail>
+
+    <summary>
+        <band height="40">
+            <line>
+                <reportElement x="0" y="5" width="535" height="1" forecolor="#E2E8F0"/>
+            </line>
+            <staticText>
+                <reportElement x="230" y="10" width="100" height="20"/>
+                <textElement textAlignment="Right"><font size="11" isBold="true"/></textElement>
+                <text><![CDATA[Grand Total:]]></text>
+            </staticText>
+            <textField pattern="'Rs.' #,##0.00">
+                <reportElement x="330" y="10" width="120" height="20"/>
+                <textElement textAlignment="Right"><font size="11" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[$V{GRAND_TOTAL}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+</jasperReport>

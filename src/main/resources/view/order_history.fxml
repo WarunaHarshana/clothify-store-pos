@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.clothify.controller.OrderHistoryController"
+            styleClass="page-container" stylesheets="@../css/main.css">
+    <VBox spacing="14" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16"
+          AnchorPane.topAnchor="16" AnchorPane.bottomAnchor="16">
+
+        <Label text="Order History" styleClass="page-title"/>
+
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="filter-bar">
+            <TextField fx:id="txtSearch" promptText="Search by order ID or status..."
+                       styleClass="search-field" HBox.hgrow="ALWAYS"/>
+            <Button text="Search" onAction="#btnSearchOnAction" styleClass="btn-secondary"/>
+            <Button text="Reload" onAction="#btnReloadOnAction" styleClass="btn-secondary"/>
+        </HBox>
+
+        <HBox spacing="14" VBox.vgrow="ALWAYS">
+            <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                <Label text="Orders" styleClass="panel-title"/>
+                <TableView fx:id="tblOrders" VBox.vgrow="ALWAYS" styleClass="products-table">
+                    <columns>
+                        <TableColumn fx:id="colOrderId" prefWidth="80" text="Order #"/>
+                        <TableColumn fx:id="colDate" prefWidth="180" text="Date"/>
+                        <TableColumn fx:id="colTotal" prefWidth="120" text="Total"/>
+                        <TableColumn fx:id="colStatus" prefWidth="100" text="Status"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No orders found." style="-fx-text-fill: #9ca3af;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <VBox styleClass="card" prefWidth="400">
+                <Label text="Order Details" styleClass="panel-title"/>
+                <TableView fx:id="tblDetails" VBox.vgrow="ALWAYS" styleClass="products-table">
+                    <columns>
+                        <TableColumn fx:id="colProduct" prefWidth="150" text="Product"/>
+                        <TableColumn fx:id="colQty" prefWidth="50" text="Qty"/>
+                        <TableColumn fx:id="colPrice" prefWidth="80" text="Price"/>
+                        <TableColumn fx:id="colLineTotal" prefWidth="90" text="Line Total"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="Select an order to view details." style="-fx-text-fill: #9ca3af;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+        </HBox>
+    </VBox>
+</AnchorPane>
+

@@ -29,6 +29,7 @@
             <Button fx:id="navEmployees" text="Employees" onAction="#handleNavEmployees" styleClass="side-btn"/>
             <Button fx:id="navReports" text="Reports" onAction="#handleNavReports" styleClass="side-btn"/>
             <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="side-btn side-logout"/>
         </VBox>
     </left>
 
@@ -37,7 +38,7 @@
             <padding><Insets top="12" right="18" bottom="12" left="18"/></padding>
             <Label text="Clothify Store POS" styleClass="dash-title"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Label text="Admin" styleClass="dash-user"/>
+            <Label fx:id="lblUserName" text="Admin" styleClass="dash-user"/>
         </HBox>
     </top>
 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              name="inventory_report" pageWidth="595" pageHeight="842" columnWidth="535"
+              leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+
+    <style name="Title" fontName="SansSerif" fontSize="18" isBold="true" forecolor="#1E293B"/>
+    <style name="Header" fontName="SansSerif" fontSize="10" isBold="true" forecolor="#FFFFFF" backcolor="#1E293B" mode="Opaque"/>
+    <style name="DetailRow" mode="Transparent" fontName="SansSerif" fontSize="10" forecolor="#333333"/>
+
+    <parameter name="FROM_DATE" class="java.sql.Date"/>
+    <parameter name="TO_DATE" class="java.sql.Date"/>
+    <parameter name="STORE_NAME" class="java.lang.String"/>
+
+    <queryString>
+        <![CDATA[
+        SELECT p.product_code,
+               p.name AS product_name,
+               p.unit_price,
+               p.quantity,
+               CASE
+                 WHEN p.quantity = 0 THEN 'Out of Stock'
+                 WHEN p.quantity < 10 THEN 'Low Stock'
+                 ELSE 'In Stock'
+               END AS stock_status
+        FROM products p
+        WHERE p.is_active = TRUE
+        ORDER BY p.quantity ASC
+        ]]>
+    </queryString>
+
+    <field name="product_code" class="java.lang.String"/>
+    <field name="product_name" class="java.lang.String"/>
+    <field name="unit_price" class="java.math.BigDecimal"/>
+    <field name="quantity" class="java.lang.Integer"/>
+    <field name="stock_status" class="java.lang.String"/>
+
+    <title>
+        <band height="80">
+            <staticText>
+                <reportElement style="Title" x="0" y="0" width="535" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Clothify Store - Inventory Report]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="35" width="535" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Generated: " + new java.text.SimpleDateFormat("dd MMM yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="25">
+            <staticText>
+                <reportElement style="Header" x="0" y="0" width="90" height="20"/>
+                <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                <text><![CDATA[Code]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="90" y="0" width="220" height="20"/>
+                <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                <text><![CDATA[Product Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="310" y="0" width="90" height="20"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><paragraph rightIndent="5"/></textElement>
+                <text><![CDATA[Price]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="400" y="0" width="60" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Qty]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Header" x="460" y="0" width="75" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="18">
+            <frame>
+                <reportElement style="DetailRow" x="0" y="0" width="535" height="18"/>
+                <textField>
+                    <reportElement x="0" y="0" width="90" height="15"/>
+                    <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                    <textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="90" y="0" width="220" height="15"/>
+                    <textElement verticalAlignment="Middle"><paragraph leftIndent="5"/></textElement>
+                    <textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+                </textField>
+                <textField pattern="#,##0.00">
+                    <reportElement x="310" y="0" width="90" height="15"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle"><paragraph rightIndent="5"/></textElement>
+                    <textFieldExpression><![CDATA[$F{unit_price}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="400" y="0" width="60" height="15"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="460" y="0" width="75" height="15"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$F{stock_status}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </detail>
+</jasperReport>

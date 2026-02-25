@@ -1,11 +1,13 @@
 module com.clothify {
+    requires transitive javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.sql;
+    requires transitive java.sql;
     requires jasperreports;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires static lombok;
+    requires java.prefs;
 
     opens com.clothify to javafx.fxml;
     opens com.clothify.controller to javafx.fxml;

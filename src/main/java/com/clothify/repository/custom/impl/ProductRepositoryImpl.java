@@ -139,6 +139,50 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
     }
 
+    @Override
+    public int getProductCount() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM products WHERE is_active = TRUE";
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet rs = pstm.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        } catch (Exception e) {
+            throw new SQLException(e);
+        }
+    }
+
+    @Override
+    public int getLowStockCount() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM products WHERE is_active = TRUE AND quantity < 10";
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet rs = pstm.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        } catch (Exception e) {
+            throw new SQLException(e);
+        }
+    }
+
+    @Override
+    public Product findById(int productId) throws SQLException {
+        String sql = "SELECT * FROM products WHERE product_id = ? AND is_active = TRUE";
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setInt(1, productId);
+                try (ResultSet rs = pstm.executeQuery()) {
+                    return rs.next() ? mapRow(rs) : null;
+                }
+            }
+        } catch (Exception e) {
+            throw new SQLException(e);
+        }
+    }
+
     private Product mapRow(ResultSet rs) throws SQLException {
         return new Product(
                 rs.getInt("product_id"),

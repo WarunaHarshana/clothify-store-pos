@@ -1,507 +1,672 @@
 .root {
     -fx-font-family: "Segoe UI";
+    font-family: "Segoe UI";
 }
 
 /* ---------------- Login ---------------- */
 .login-root {
     -fx-background-color: white;
+    background-color: white;
 }
 
 .login-left-pane {
     -fx-background-image: url("../img/login_bg_store.png");
+    background-image: url("../img/login_bg_store.png");
     -fx-background-size: cover;
+    background-size: cover;
     -fx-background-position: center;
+    background-position: center;
 }
 
 .login-left-pane .hero-title {
     -fx-text-fill: white;
     -fx-font-size: 42px;
+    font-size: 42px;
     -fx-font-weight: 800;
+    font-weight: 800;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.4, 0, 2);
 }
 
 .login-left-pane .hero-subtitle {
     -fx-text-fill: #e5e7eb;
     -fx-font-size: 16px;
+    font-size: 16px;
     -fx-font-weight: 400;
+    font-weight: 400;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 6, 0.4, 0, 1);
 }
 
 .login-right-pane {
     -fx-background-color: white;
+    background-color: white;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 30, 0.2, -10, 0);
 }
 
 .login-form-container {
     -fx-padding: 40;
+    padding: 40;
 }
 
 .brand-title {
     -fx-text-fill: #111827;
     -fx-font-size: 26px;
+    font-size: 26px;
     -fx-font-weight: 800;
+    font-weight: 800;
 }
 
 .brand-subtitle {
     -fx-text-fill: #6b7280;
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-font-weight: 500;
+    font-weight: 500;
 }
 
 .field-label {
     -fx-text-fill: #374151;
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .form-input {
     -fx-background-color: #f9fafb;
+    background-color: #f9fafb;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 8;
+    border-radius: 8;
     -fx-background-radius: 8;
     -fx-padding: 12 14;
+    padding: 12 14;
     -fx-font-size: 13px;
+    font-size: 13px;
 }
 
 .form-input:focused {
     -fx-border-color: #4f46e5;
+    border-color: #4f46e5;
     -fx-effect: dropshadow(gaussian, rgba(79, 70, 229, 0.2), 8, 0.2, 0, 0);
 }
 
 .login-button {
     -fx-background-color: #111827;
+    background-color: #111827;
     -fx-text-fill: white;
     -fx-background-radius: 8;
     -fx-font-size: 14px;
+    font-size: 14px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .login-button:hover {
     -fx-background-color: #374151;
+    background-color: #374151;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.2, 0, 4);
 }
 
 .message-label {
     -fx-text-fill: #dc2626;
     -fx-font-size: 12px;
+    font-size: 12px;
 }
 
 .remember-me-check {
     -fx-text-fill: #374151;
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-font-weight: 500;
+    font-weight: 500;
 }
 
 .remember-me-check .box {
     -fx-background-color: #f9fafb;
+    background-color: #f9fafb;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 4;
+    border-radius: 4;
 }
 
 .remember-me-check:selected .box {
     -fx-background-color: #4f46e5;
+    background-color: #4f46e5;
     -fx-border-color: #4f46e5;
+    border-color: #4f46e5;
 }
 
 .remember-me-check:selected .mark {
     -fx-background-color: white;
+    background-color: white;
 }
 
 /* ---------------- Product Form ---------------- */
 .product-root {
     -fx-background-color: #eef0f2;
+    background-color: #eef0f2;
 }
 
 .page-header {
     -fx-background-color: #3f4650;
+    background-color: #3f4650;
     -fx-padding: 14 18;
+    padding: 14 18;
 }
 
 .page-header-title {
     -fx-text-fill: white;
     -fx-font-size: 20px;
+    font-size: 20px;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .page-subtitle {
     -fx-text-fill: #d1d5db;
     -fx-font-size: 12px;
+    font-size: 12px;
 }
 
 .toolbar-card,
 .table-card {
     -fx-background-color: #ffffff;
+    background-color: #ffffff;
     -fx-background-radius: 12;
     -fx-padding: 16;
+    padding: 16;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0.18, 0, 2);
 }
 
 .form-input {
     -fx-background-color: #f9fafb;
+    background-color: #f9fafb;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 8;
+    border-radius: 8;
     -fx-background-radius: 8;
     -fx-padding: 8 10;
+    padding: 8 10;
 }
 
 .form-input:focused {
     -fx-border-color: #6b7280;
+    border-color: #6b7280;
 }
 
 .action-btn {
     -fx-text-fill: white;
     -fx-font-weight: 600;
+    font-weight: 600;
     -fx-background-radius: 8;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .btn-add {
     -fx-background-color: #374151;
+    background-color: #374151;
 }
 
 .btn-update {
     -fx-background-color: #4b5563;
+    background-color: #4b5563;
 }
 
 .btn-delete {
     -fx-background-color: #6b7280;
+    background-color: #6b7280;
 }
 
 .btn-stock-in {
     -fx-background-color: #10b981;
+    background-color: #10b981;
 }
 
 .btn-stock-out {
     -fx-background-color: #ef4444;
+    background-color: #ef4444;
 }
 
 .btn-search {
     -fx-background-color: #4b5563;
+    background-color: #4b5563;
 }
 
 .btn-reload {
     -fx-background-color: #6b7280;
+    background-color: #6b7280;
 }
 
 .action-btn:hover {
     -fx-opacity: 0.92;
+    opacity: 0.92;
 }
 
 .table-view {
     -fx-background-color: white;
+    background-color: white;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 10;
+    border-radius: 10;
     -fx-background-radius: 10;
 }
 
 .table-view .column-header-background {
     -fx-background-color: #e5e7eb;
+    background-color: #e5e7eb;
 }
 
 .table-view .column-header,
 .table-view .filler {
     -fx-size: 36;
+    size: 36;
     -fx-border-color: transparent transparent #d1d5db transparent;
+    border-color: transparent transparent #d1d5db transparent;
     -fx-background-color: transparent;
+    background-color: transparent;
 }
 
 .table-view .column-header .label {
     -fx-text-fill: #374151;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 /* ---------------- Dashboard ---------------- */
 .dashboard-root {
     -fx-background-color: #eef0f2;
+    background-color: #eef0f2;
 }
 
 .side-nav {
     -fx-background-color: #3f4650;
+    background-color: #3f4650;
 }
 
 .side-brand {
     -fx-text-fill: white;
     -fx-font-size: 20px;
+    font-size: 20px;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .side-sub {
     -fx-text-fill: #d1d5db;
     -fx-font-size: 11px;
+    font-size: 11px;
     -fx-padding: 0 0 12 2;
+    padding: 0 0 12 2;
 }
 
 .side-btn {
     -fx-background-color: transparent;
+    background-color: transparent;
     -fx-text-fill: #e5e7eb;
     -fx-alignment: center-left;
     -fx-background-radius: 8;
     -fx-padding: 10 12;
+    padding: 10 12;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .side-btn:hover {
     -fx-background-color: #596170;
+    background-color: #596170;
 }
 
 .side-btn-active {
     -fx-background-color: #6b7280;
+    background-color: #6b7280;
 }
 
 .side-logout {
     -fx-background-color: #4b5563;
+    background-color: #4b5563;
 }
 
 .dash-topbar {
     -fx-background-color: white;
+    background-color: white;
     -fx-border-color: transparent transparent #d1d5db transparent;
+    border-color: transparent transparent #d1d5db transparent;
 }
 
 .dash-title {
     -fx-text-fill: #374151;
     -fx-font-size: 20px;
+    font-size: 20px;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .dash-user {
     -fx-text-fill: #6b7280;
     -fx-font-weight: 600;
+    font-weight: 600;
 }
 
 .welcome-card,
 .kpi-card,
 .panel-card {
     -fx-background-color: white;
+    background-color: white;
     -fx-background-radius: 12;
     -fx-padding: 14;
+    padding: 14;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0.2, 0, 1);
 }
 
 .welcome-title {
     -fx-font-size: 20px;
+    font-size: 20px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-text-fill: #1f2937;
 }
 
 .welcome-sub {
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-text-fill: #6b7280;
 }
 
 .welcome-date {
     -fx-text-fill: #4b5563;
     -fx-font-weight: 600;
+    font-weight: 600;
 }
 
 .kpi-label {
     -fx-font-size: 11px;
+    font-size: 11px;
     -fx-text-fill: #6b7280;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .kpi-value {
     -fx-font-size: 24px;
+    font-size: 24px;
     -fx-text-fill: #1f2937;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .kpi-trend {
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-text-fill: #10b981;
 }
 
 .kpi-warning {
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-text-fill: #f59e0b;
 }
 
 .kpi-danger {
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-text-fill: #ef4444;
 }
 
 .panel-title {
     -fx-font-size: 16px;
+    font-size: 16px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-text-fill: #374151;
     -fx-padding: 0 0 8 0;
+    padding: 0 0 8 0;
 }
 
 .chip {
     -fx-background-color: #e5e7eb;
+    background-color: #e5e7eb;
     -fx-background-radius: 12;
     -fx-padding: 6 10;
+    padding: 6 10;
     -fx-text-fill: #374151;
     -fx-font-size: 12px;
+    font-size: 12px;
 }
 
 .list-item {
     -fx-padding: 3 0;
+    padding: 3 0;
     -fx-text-fill: #374151;
 }
 
 /* ---------------- Products (Thogakade style, gray) ---------------- */
 .page-container {
     -fx-background-color: #eef0f2;
+    background-color: #eef0f2;
 }
 
 .page-title {
     -fx-font-size: 24px;
+    font-size: 24px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-text-fill: #1f2937;
 }
 
 .filter-bar {
     -fx-padding: 2 0 2 0;
+    padding: 2 0 2 0;
 }
 
 .search-field {
     -fx-background-color: #ffffff;
+    background-color: #ffffff;
     -fx-background-radius: 10;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 10;
+    border-radius: 10;
     -fx-padding: 10 12;
+    padding: 10 12;
 }
 
 .search-field:focused {
     -fx-border-color: #6b7280;
+    border-color: #6b7280;
     -fx-effect: dropshadow(gaussian, rgba(107, 114, 128, 0.2), 8, 0.2, 0, 0);
 }
 
 .btn-primary {
     -fx-background-color: #4b5563;
+    background-color: #4b5563;
     -fx-text-fill: white;
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-background-radius: 9;
     -fx-padding: 9 16;
+    padding: 9 16;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .btn-primary:hover {
     -fx-background-color: #374151;
+    background-color: #374151;
 }
 
 .btn-secondary {
     -fx-background-color: #ffffff;
+    background-color: #ffffff;
     -fx-text-fill: #374151;
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-background-radius: 9;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 9;
+    border-radius: 9;
     -fx-padding: 9 14;
+    padding: 9 14;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .btn-secondary:hover {
     -fx-background-color: #f3f4f6;
+    background-color: #f3f4f6;
 }
 
 .btn-danger {
     -fx-background-color: #ef4444;
+    background-color: #ef4444;
     -fx-text-fill: white;
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-background-radius: 9;
     -fx-padding: 9 14;
+    padding: 9 14;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .btn-danger:hover {
     -fx-background-color: #dc2626;
+    background-color: #dc2626;
 }
 
 .btn-success {
     -fx-background-color: #10b981;
+    background-color: #10b981;
     -fx-text-fill: white;
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-background-radius: 9;
     -fx-padding: 9 14;
+    padding: 9 14;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .btn-success:hover {
     -fx-background-color: #059669;
+    background-color: #059669;
 }
 
 .products-table {
     -fx-background-color: transparent;
+    background-color: transparent;
     -fx-border-width: 0;
+    border-width: 0;
 }
 
 .products-table .column-header-background {
     -fx-background-color: #e5e7eb;
+    background-color: #e5e7eb;
 }
 
 .products-table .column-header {
     -fx-background-color: #e5e7eb;
+    background-color: #e5e7eb;
     -fx-border-color: transparent transparent #d1d5db transparent;
+    border-color: transparent transparent #d1d5db transparent;
 }
 
 .products-table .column-header .label {
     -fx-text-fill: #4b5563;
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .products-table .table-row-cell {
     -fx-background-color: #ffffff;
+    background-color: #ffffff;
     -fx-border-color: transparent transparent #f3f4f6 transparent;
+    border-color: transparent transparent #f3f4f6 transparent;
 }
 
 .products-table .table-row-cell:hover {
     -fx-background-color: #f9fafb;
+    background-color: #f9fafb;
 }
 
 .products-table .table-row-cell:selected {
     -fx-background-color: rgba(75, 85, 99, 0.12);
+    background-color: rgba(75, 85, 99, 0.12);
 }
 
 /* ---------------- POS Form ---------------- */
 .card {
     -fx-background-color: white;
+    background-color: white;
     -fx-background-radius: 12;
     -fx-padding: 14;
+    padding: 14;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0.2, 0, 1);
 }
 
 .text-input {
     -fx-background-color: #f9fafb;
+    background-color: #f9fafb;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 8;
+    border-radius: 8;
     -fx-background-radius: 8;
     -fx-padding: 8 10;
+    padding: 8 10;
 }
 
 .text-input:focused {
     -fx-border-color: #6b7280;
+    border-color: #6b7280;
 }
 
 .pos-cat-tab {
     -fx-background-color: #e5e7eb;
+    background-color: #e5e7eb;
     -fx-text-fill: #374151;
     -fx-background-radius: 16;
     -fx-padding: 6 14;
+    padding: 6 14;
     -fx-font-size: 12px;
+    font-size: 12px;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .pos-cat-tab:hover {
     -fx-background-color: #d1d5db;
+    background-color: #d1d5db;
 }
 
 .pos-cat-active {
     -fx-background-color: #4b5563;
+    background-color: #4b5563;
     -fx-text-fill: white;
 }
 
 .pos-product-card {
     -fx-background-color: white;
+    background-color: white;
     -fx-background-radius: 12;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 6, 0.15, 0, 1);
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .pos-product-card:hover {
@@ -510,57 +675,78 @@
 
 .top-item-name {
     -fx-font-size: 13px;
+    font-size: 13px;
     -fx-font-weight: 600;
+    font-weight: 600;
     -fx-text-fill: #1f2937;
 }
 
 .top-item-qty {
     -fx-font-size: 11px;
+    font-size: 11px;
     -fx-text-fill: #6b7280;
 }
 
 .pos-add-btn {
     -fx-background-color: #374151;
+    background-color: #374151;
     -fx-text-fill: white;
     -fx-background-radius: 8;
     -fx-padding: 6 12;
+    padding: 6 12;
     -fx-font-size: 11px;
+    font-size: 11px;
     -fx-font-weight: 600;
+    font-weight: 600;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .pos-add-btn:hover {
     -fx-background-color: #4b5563;
+    background-color: #4b5563;
 }
 
 .status-badge {
     -fx-background-radius: 10;
     -fx-padding: 2 8;
+    padding: 2 8;
     -fx-font-size: 11px;
+    font-size: 11px;
     -fx-font-weight: 700;
+    font-weight: 700;
 }
 
 .status-pending {
     -fx-background-color: #fef3c7;
+    background-color: #fef3c7;
     -fx-text-fill: #92400e;
 }
 
 .filter-combo {
     -fx-background-color: #f9fafb;
+    background-color: #f9fafb;
     -fx-border-color: #d1d5db;
+    border-color: #d1d5db;
     -fx-border-radius: 8;
+    border-radius: 8;
     -fx-background-radius: 8;
 }
 
 .pos-place-order-btn {
     -fx-background-color: #10b981;
+    background-color: #10b981;
     -fx-text-fill: white;
     -fx-background-radius: 10;
     -fx-font-size: 14px;
+    font-size: 14px;
     -fx-font-weight: 700;
+    font-weight: 700;
     -fx-cursor: hand;
+    cursor: hand;
 }
 
 .pos-place-order-btn:hover {
     -fx-background-color: #059669;
+    background-color: #059669;
 }

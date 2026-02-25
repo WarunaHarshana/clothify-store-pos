@@ -3,13 +3,19 @@ package com.clothify.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import com.clothify.util.SessionManager;
 
 public class MainLayoutController {
 
     @FXML
     private StackPane contentArea;
+    @FXML
+    private Label lblUserName;
 
     @FXML
     private Button navDashboard;
@@ -32,6 +38,9 @@ public class MainLayoutController {
 
     @FXML
     public void initialize() {
+        if (SessionManager.getCurrentUser() != null) {
+            lblUserName.setText(SessionManager.getCurrentUser().getFullName());
+        }
         loadPage("/view/dashboard_content.fxml", navDashboard);
     }
 
@@ -42,15 +51,29 @@ public class MainLayoutController {
     @FXML
     void handleNavPOS() { loadPage("/view/pos_form.fxml", navPOS); }
     @FXML
-    void handleNavOrders() { loadPage("/view/module_placeholder.fxml", navOrders); }
+    void handleNavOrders() { loadPage("/view/order_history.fxml", navOrders); }
     @FXML
-    void handleNavInventory() { loadPage("/view/module_placeholder.fxml", navInventory); }
+    void handleNavInventory() { loadPage("/view/product_form.fxml", navInventory); }
     @FXML
-    void handleNavSuppliers() { loadPage("/view/module_placeholder.fxml", navSuppliers); }
+    void handleNavSuppliers() { loadPage("/view/supplier_form.fxml", navSuppliers); }
     @FXML
-    void handleNavEmployees() { loadPage("/view/module_placeholder.fxml", navEmployees); }
+    void handleNavEmployees() { loadPage("/view/employee_form.fxml", navEmployees); }
     @FXML
-    void handleNavReports() { loadPage("/view/module_placeholder.fxml", navReports); }
+    void handleNavReports() { loadPage("/view/report_form.fxml", navReports); }
+
+    @FXML
+    void handleLogout() {
+        try {
+            SessionManager.clear();
+            Stage stage = (Stage) contentArea.getScene().getWindow();
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/login_form.fxml"))));
+            stage.setMaximized(false);
+            stage.setResizable(false);
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void loadPage(String fxml, Button navBtn) {
         try {
