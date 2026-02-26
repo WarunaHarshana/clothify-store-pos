@@ -1,4 +1,4 @@
-package com.clothify.service.custom;
+package com.clothify.service;
 
 import com.clothify.model.CartItem;
 import com.clothify.model.Order;
@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface OrderService {
     boolean placeOrder(List<CartItem> cartItems, int cashierUserId) throws SQLException;
+    int placeOrderAndGetId(List<CartItem> cartItems, int cashierUserId) throws SQLException;
     List<Order> getAllOrders() throws SQLException;
     List<Order> searchOrders(String keyword) throws SQLException;
     List<OrderDetail> getOrderDetails(int orderId) throws SQLException;
     int getTodayOrderCount() throws SQLException;
     double getTodaySalesTotal() throws SQLException;
 }
-

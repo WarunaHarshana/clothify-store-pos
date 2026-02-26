@@ -1,9 +1,9 @@
-package com.clothify.repository.custom.impl;
+package com.clothify.repository.impl;
 
 import com.clothify.db.DbConnection;
 import com.clothify.model.Order;
 import com.clothify.model.OrderDetail;
-import com.clothify.repository.custom.OrderRepository;
+import com.clothify.repository.OrderRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,7 +29,8 @@ public class OrderRepositoryImpl implements OrderRepository {
             pstm.executeUpdate();
 
             try (ResultSet keys = pstm.getGeneratedKeys()) {
-                if (keys.next()) return keys.getInt(1);
+                if (keys.next())
+                    return keys.getInt(1);
                 throw new SQLException("Failed to get generated order ID");
             }
         }
@@ -58,9 +59,10 @@ public class OrderRepositoryImpl implements OrderRepository {
         try {
             Connection conn = DbConnection.getInstance().getConnection();
             try (PreparedStatement pstm = conn.prepareStatement(sql);
-                 ResultSet rs = pstm.executeQuery()) {
+                    ResultSet rs = pstm.executeQuery()) {
                 List<Order> list = new ArrayList<>();
-                while (rs.next()) list.add(mapOrder(rs));
+                while (rs.next())
+                    list.add(mapOrder(rs));
                 return list;
             }
         } catch (Exception e) {
@@ -79,7 +81,8 @@ public class OrderRepositoryImpl implements OrderRepository {
                 pstm.setString(2, text);
                 try (ResultSet rs = pstm.executeQuery()) {
                     List<Order> list = new ArrayList<>();
-                    while (rs.next()) list.add(mapOrder(rs));
+                    while (rs.next())
+                        list.add(mapOrder(rs));
                     return list;
                 }
             }
@@ -105,8 +108,7 @@ public class OrderRepositoryImpl implements OrderRepository {
                                 rs.getString("product_name"),
                                 rs.getInt("quantity"),
                                 rs.getDouble("unit_price"),
-                                rs.getDouble("line_total")
-                        ));
+                                rs.getDouble("line_total")));
                     }
                     return list;
                 }
@@ -122,7 +124,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         try {
             Connection conn = DbConnection.getInstance().getConnection();
             try (PreparedStatement pstm = conn.prepareStatement(sql);
-                 ResultSet rs = pstm.executeQuery()) {
+                    ResultSet rs = pstm.executeQuery()) {
                 return rs.next() ? rs.getInt(1) : 0;
             }
         } catch (Exception e) {
@@ -136,12 +138,59 @@ public class OrderRepositoryImpl implements OrderRepository {
         try {
             Connection conn = DbConnection.getInstance().getConnection();
             try (PreparedStatement pstm = conn.prepareStatement(sql);
-                 ResultSet rs = pstm.executeQuery()) {
+                    ResultSet rs = pstm.executeQuery()) {
                 return rs.next() ? rs.getDouble(1) : 0;
             }
         } catch (Exception e) {
             throw new SQLException(e);
         }
+    }
+
+    @Override
+    public java.util.Map<String, Double> getSalesLast7Days() throws SQLException {
+        String sql = "SELECT DATE(order_date) as date, SUM(total_amount) as total " +
+                "FROM orders " +
+                "WHERE order_date >= DATE(DATE_SUB(NOW(), INTERVAL 7 DAY)) AND status='COMPLETED' " +
+                "GROUP BY DATE(order_date) " +
+                "ORDER BY DATE(order_date) ASC";
+        java.util.Map<String, Double> sales = new java.util.LinkedHashMap<>();
+        try {
+            Connection conn = DbConnection.getInstance().getConnection();
+            try (PreparedStatement pstm = conn.prepareStatement(sql);
+                    ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    sales.put(rs.getString("date"), rs.getDouble("total"));
+                }
+            }
+        } catch (Exception e) {
+            throw new SQLException(e);
+        }
+        return sales;
+    }
+
+    @Override
+    public java.util.Map<String, Integer> getTopSellingProducts(int limit) throws SQLException {
+        String sql = "SELECT product_name, SUM(quantity) as qty " +
+                "FROM order_details d " +
+                "JOIN orders o ON d.order_id = o.order_id " +
+                "WHERE o.status = 'COMPLETED' " +
+                "GROUP BY product_name " +
+                "ORDER BY qty DESC LIMIT ?";
+        java.util.Map<String, Integer> topProducts = new java.util.LinkedHashMap<>();
+        try {
+            Connection conn = DbConnection.getInstance().getConnection();
+            try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+                pstm.setInt(1, limit);
+                try (ResultSet rs = pstm.executeQuery()) {
+                    while (rs.next()) {
+                        topProducts.put(rs.getString("product_name"), rs.getInt("qty"));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new SQLException(e);
+        }
+        return topProducts;
     }
 
     private Order mapOrder(ResultSet rs) throws SQLException {
@@ -150,8 +199,6 @@ public class OrderRepositoryImpl implements OrderRepository {
                 rs.getString("order_date"),
                 rs.getInt("user_id"),
                 rs.getDouble("total_amount"),
-                rs.getString("status")
-        );
+                rs.getString("status"));
     }
 }
-

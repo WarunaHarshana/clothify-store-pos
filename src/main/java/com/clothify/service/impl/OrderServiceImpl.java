@@ -1,12 +1,12 @@
-package com.clothify.service.custom.impl;
+package com.clothify.service.impl;
 
 import com.clothify.db.DbConnection;
 import com.clothify.model.*;
-import com.clothify.repository.custom.OrderRepository;
-import com.clothify.repository.custom.ProductRepository;
-import com.clothify.repository.custom.impl.OrderRepositoryImpl;
-import com.clothify.repository.custom.impl.ProductRepositoryImpl;
-import com.clothify.service.custom.OrderService;
+import com.clothify.repository.OrderRepository;
+import com.clothify.repository.ProductRepository;
+import com.clothify.repository.impl.OrderRepositoryImpl;
+import com.clothify.repository.impl.ProductRepositoryImpl;
+import com.clothify.service.OrderService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,7 +20,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean placeOrder(List<CartItem> cartItems, int cashierUserId) throws SQLException {
-        if (cartItems == null || cartItems.isEmpty()) return false;
+        return placeOrderAndGetId(cartItems, cashierUserId) > 0;
+    }
+
+    @Override
+    public int placeOrderAndGetId(List<CartItem> cartItems, int cashierUserId) throws SQLException {
+        if (cartItems == null || cartItems.isEmpty()) return -1;
 
         Connection conn;
         try {
@@ -32,23 +37,19 @@ public class OrderServiceImpl implements OrderService {
         try {
             conn.setAutoCommit(false);
 
-            // 1. Validate stock
             for (CartItem item : cartItems) {
                 Product product = productRepository.findById(item.getProductId());
                 if (product == null || product.getQuantity() < item.getQuantity()) {
                     conn.rollback();
-                    return false;
+                    return -1;
                 }
             }
 
-            // 2. Calculate total
             double total = cartItems.stream().mapToDouble(CartItem::getLineTotal).sum();
 
-            // 3. Save order
             Order order = new Order(0, null, cashierUserId, total, "COMPLETED");
             int orderId = orderRepository.saveOrder(conn, order);
 
-            // 4. Save order details
             List<OrderDetail> details = new ArrayList<>();
             for (CartItem item : cartItems) {
                 details.add(new OrderDetail(
@@ -62,7 +63,6 @@ public class OrderServiceImpl implements OrderService {
             }
             orderRepository.saveOrderDetails(conn, details);
 
-            // 5. Deduct stock
             for (CartItem item : cartItems) {
                 Product product = productRepository.findById(item.getProductId());
                 int newQty = product.getQuantity() - item.getQuantity();
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
             }
 
             conn.commit();
-            return true;
+            return orderId;
         } catch (Exception e) {
             conn.rollback();
             throw new SQLException(e);
@@ -104,4 +104,3 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.getTodaySalesTotal();
     }
 }
-

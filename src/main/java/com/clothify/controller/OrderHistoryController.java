@@ -2,8 +2,8 @@ package com.clothify.controller;
 
 import com.clothify.model.Order;
 import com.clothify.model.OrderDetail;
-import com.clothify.service.custom.OrderService;
-import com.clothify.service.custom.impl.OrderServiceImpl;
+import com.clothify.service.OrderService;
+import com.clothify.service.impl.OrderServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

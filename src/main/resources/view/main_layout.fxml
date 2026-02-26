@@ -22,6 +22,7 @@
 
             <Button fx:id="navDashboard" text="Dashboard" onAction="#handleNavDashboard" styleClass="side-btn"/>
             <Button fx:id="navProducts" text="Products" onAction="#handleNavProducts" styleClass="side-btn"/>
+            <Button fx:id="navCategories" text="Categories" onAction="#handleNavCategories" styleClass="side-btn"/>
             <Button fx:id="navPOS" text="Point of Sale" onAction="#handleNavPOS" styleClass="side-btn"/>
             <Button fx:id="navOrders" text="Orders" onAction="#handleNavOrders" styleClass="side-btn"/>
             <Button fx:id="navInventory" text="Inventory" onAction="#handleNavInventory" styleClass="side-btn"/>

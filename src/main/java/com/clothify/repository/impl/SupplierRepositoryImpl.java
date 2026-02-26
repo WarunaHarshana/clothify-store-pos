@@ -1,8 +1,8 @@
-package com.clothify.repository.custom.impl;
+package com.clothify.repository.impl;
 
 import com.clothify.db.DbConnection;
 import com.clothify.model.Supplier;
-import com.clothify.repository.custom.SupplierRepository;
+import com.clothify.repository.SupplierRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

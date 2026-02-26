@@ -1,4 +1,4 @@
-package com.clothify.repository.custom;
+package com.clothify.repository;
 
 import com.clothify.model.User;
 

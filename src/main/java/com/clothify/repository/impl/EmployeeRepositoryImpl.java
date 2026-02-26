@@ -1,8 +1,8 @@
-package com.clothify.repository.custom.impl;
+package com.clothify.repository.impl;
 
 import com.clothify.db.DbConnection;
 import com.clothify.model.Employee;
-import com.clothify.repository.custom.EmployeeRepository;
+import com.clothify.repository.EmployeeRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

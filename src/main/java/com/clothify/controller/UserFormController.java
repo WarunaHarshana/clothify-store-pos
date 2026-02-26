@@ -1,8 +1,8 @@
 package com.clothify.controller;
 
 import com.clothify.model.User;
-import com.clothify.service.custom.UserService;
-import com.clothify.service.custom.impl.UserServiceImpl;
+import com.clothify.service.UserService;
+import com.clothify.service.impl.UserServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

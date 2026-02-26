@@ -2,10 +2,11 @@ package com.clothify.controller;
 
 import com.clothify.model.CartItem;
 import com.clothify.model.Product;
-import com.clothify.service.custom.OrderService;
-import com.clothify.service.custom.ProductService;
-import com.clothify.service.custom.impl.OrderServiceImpl;
-import com.clothify.service.custom.impl.ProductServiceImpl;
+import com.clothify.service.OrderService;
+import com.clothify.service.ProductService;
+import com.clothify.service.impl.OrderServiceImpl;
+import com.clothify.service.impl.ProductServiceImpl;
+import com.clothify.util.InvoiceUtil;
 import com.clothify.util.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,21 +18,31 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class PosFormController implements Initializable {
 
-    @FXML private TextField txtSearch;
-    @FXML private FlowPane productFlow;
-    @FXML private TableView<CartItem> tblCart;
-    @FXML private TableColumn<CartItem, String> colCartName;
-    @FXML private TableColumn<CartItem, Integer> colCartQty;
-    @FXML private TableColumn<CartItem, Double> colCartPrice;
-    @FXML private TableColumn<CartItem, Double> colCartTotal;
-    @FXML private Label lblItemCount;
-    @FXML private Label lblTotal;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private FlowPane productFlow;
+    @FXML
+    private TableView<CartItem> tblCart;
+    @FXML
+    private TableColumn<CartItem, String> colCartName;
+    @FXML
+    private TableColumn<CartItem, Integer> colCartQty;
+    @FXML
+    private TableColumn<CartItem, Double> colCartPrice;
+    @FXML
+    private TableColumn<CartItem, Double> colCartTotal;
+    @FXML
+    private Label lblItemCount;
+    @FXML
+    private Label lblTotal;
 
     private final ProductService productService = new ProductServiceImpl();
     private final OrderService orderService = new OrderServiceImpl();
@@ -45,7 +56,12 @@ public class PosFormController implements Initializable {
         colCartTotal.setCellValueFactory(new PropertyValueFactory<>("lineTotal"));
         tblCart.setItems(cart);
 
-        loadProducts(null);
+        try {
+            loadProducts(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("POS initialize error: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -83,12 +99,25 @@ public class PosFormController implements Initializable {
         }
 
         int cashierId = SessionManager.getCurrentUser() != null
-                ? SessionManager.getCurrentUser().getUserId() : 1;
+                ? SessionManager.getCurrentUser().getUserId()
+                : 1;
 
         try {
-            if (orderService.placeOrder(cart, cashierId)) {
-                new Alert(Alert.AlertType.INFORMATION,
-                        "Order placed successfully!\nTotal: Rs. " + String.format("%.2f", getCartTotal())).show();
+            int orderId = orderService.placeOrderAndGetId(cart, cashierId);
+            if (orderId > 0) {
+                File invoice = null;
+                try {
+                    invoice = InvoiceUtil.generateInvoicePdf(orderId);
+                } catch (Exception ignored) {
+                }
+
+                String msg = "Order placed successfully!\nOrder ID: " + orderId +
+                        "\nTotal: Rs. " + String.format("%.2f", getCartTotal());
+                if (invoice != null) {
+                    msg += "\nInvoice: " + invoice.getAbsolutePath();
+                }
+
+                new Alert(Alert.AlertType.INFORMATION, msg).show();
                 cart.clear();
                 updateTotals();
                 loadProducts(null);
@@ -113,7 +142,8 @@ public class PosFormController implements Initializable {
                 productFlow.getChildren().add(createProductCard(p));
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to load products").show();
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to load products: " + e.getMessage()).show();
         }
     }
 
@@ -124,6 +154,9 @@ public class PosFormController implements Initializable {
         Label price = new Label("Rs. " + String.format("%.2f", product.getUnitPrice()));
         price.getStyleClass().add("kpi-value");
         price.setStyle("-fx-font-size: 16px;");
+
+        Label category = new Label(product.getCategoryName() == null ? "Uncategorized" : product.getCategoryName());
+        category.getStyleClass().add("top-item-qty");
 
         Label stock = new Label("Stock: " + product.getQuantity());
         stock.getStyleClass().add("top-item-qty");
@@ -138,7 +171,7 @@ public class PosFormController implements Initializable {
             addBtn.setText("Out of Stock");
         }
 
-        VBox card = new VBox(6, name, price, stock, addBtn);
+        VBox card = new VBox(6, name, price, category, stock, addBtn);
         card.getStyleClass().add("pos-product-card");
         card.setPadding(new Insets(12));
         card.setPrefWidth(170);
@@ -146,7 +179,6 @@ public class PosFormController implements Initializable {
     }
 
     private void addToCart(Product product) {
-        // Check if already in cart
         for (CartItem item : cart) {
             if (item.getProductId() == product.getProductId()) {
                 if (item.getQuantity() + 1 > product.getQuantity()) {
@@ -159,7 +191,7 @@ public class PosFormController implements Initializable {
                 return;
             }
         }
-        // New item
+
         if (product.getQuantity() < 1) {
             new Alert(Alert.AlertType.WARNING, "Out of stock").show();
             return;
@@ -177,4 +209,3 @@ public class PosFormController implements Initializable {
         return cart.stream().mapToDouble(CartItem::getLineTotal).sum();
     }
 }
-

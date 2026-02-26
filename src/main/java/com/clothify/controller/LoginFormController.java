@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import com.clothify.model.User;
-import com.clothify.service.custom.UserService;
-import com.clothify.service.custom.impl.UserServiceImpl;
+import com.clothify.service.UserService;
+import com.clothify.service.impl.UserServiceImpl;
 import com.clothify.util.SessionManager;
 
 import javafx.fxml.Initializable;

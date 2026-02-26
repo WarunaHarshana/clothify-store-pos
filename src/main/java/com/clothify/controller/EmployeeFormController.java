@@ -1,8 +1,8 @@
 package com.clothify.controller;
 
 import com.clothify.model.Employee;
-import com.clothify.service.custom.EmployeeService;
-import com.clothify.service.custom.impl.EmployeeServiceImpl;
+import com.clothify.service.EmployeeService;
+import com.clothify.service.impl.EmployeeServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

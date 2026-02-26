@@ -1,8 +1,8 @@
 package com.clothify.controller;
 
 import com.clothify.model.Supplier;
-import com.clothify.service.custom.SupplierService;
-import com.clothify.service.custom.impl.SupplierServiceImpl;
+import com.clothify.service.SupplierService;
+import com.clothify.service.impl.SupplierServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

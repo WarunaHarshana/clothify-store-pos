@@ -1,8 +1,11 @@
 package com.clothify.controller;
 
+import com.clothify.model.Category;
 import com.clothify.model.Product;
-import com.clothify.service.custom.ProductService;
-import com.clothify.service.custom.impl.ProductServiceImpl;
+import com.clothify.service.CategoryService;
+import com.clothify.service.ProductService;
+import com.clothify.service.impl.CategoryServiceImpl;
+import com.clothify.service.impl.ProductServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductFormController implements Initializable {
@@ -17,40 +21,49 @@ public class ProductFormController implements Initializable {
     private static final String MSG_SELECT_PRODUCT = "Select a product first";
     private static final String MSG_STOCK_FAILED = "Stock update failed";
 
-    @FXML
-    private TextField txtCode;
-    @FXML
-    private TextField txtName;
-    @FXML
-    private TextField txtPrice;
-    @FXML
-    private TextField txtQty;
-    @FXML
-    private TextField txtSearch;
+    @FXML private TextField txtCode;
+    @FXML private TextField txtName;
+    @FXML private TextField txtPrice;
+    @FXML private TextField txtQty;
+    @FXML private TextField txtSearch;
+    @FXML private ComboBox<Category> cmbCategory;
 
-    @FXML
-    private TableView<Product> tblProducts;
-    @FXML
-    private TableColumn<Product, Integer> colId;
-    @FXML
-    private TableColumn<Product, String> colCode;
-    @FXML
-    private TableColumn<Product, String> colName;
-    @FXML
-    private TableColumn<Product, Double> colPrice;
-    @FXML
-    private TableColumn<Product, Integer> colQty;
+    @FXML private TableView<Product> tblProducts;
+    @FXML private TableColumn<Product, Integer> colId;
+    @FXML private TableColumn<Product, String> colCode;
+    @FXML private TableColumn<Product, String> colName;
+    @FXML private TableColumn<Product, String> colCategory;
+    @FXML private TableColumn<Product, Double> colPrice;
+    @FXML private TableColumn<Product, Integer> colQty;
 
     private final ProductService productService = new ProductServiceImpl();
+    private final CategoryService categoryService = new CategoryServiceImpl();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colId.setCellValueFactory(new PropertyValueFactory<>("productId"));
         colCode.setCellValueFactory(new PropertyValueFactory<>("productCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+        cmbCategory.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Category item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getCategoryName());
+            }
+        });
+        cmbCategory.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(Category item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getCategoryName());
+            }
+        });
+
+        loadCategories();
         loadTable();
         setNextCode();
 
@@ -60,6 +73,17 @@ public class ProductFormController implements Initializable {
                 txtName.setText(product.getName());
                 txtPrice.setText(String.valueOf(product.getUnitPrice()));
                 txtQty.setText(String.valueOf(product.getQuantity()));
+
+                if (product.getCategoryId() != null) {
+                    for (Category c : cmbCategory.getItems()) {
+                        if (c.getCategoryId() == product.getCategoryId()) {
+                            cmbCategory.setValue(c);
+                            break;
+                        }
+                    }
+                } else {
+                    cmbCategory.setValue(null);
+                }
             }
         });
     }
@@ -73,6 +97,8 @@ public class ProductFormController implements Initializable {
             product.setUnitPrice(Double.parseDouble(txtPrice.getText().trim()));
             product.setQuantity(Integer.parseInt(txtQty.getText().trim()));
             product.setActive(true);
+            Category selectedCategory = cmbCategory.getValue();
+            product.setCategoryId(selectedCategory == null ? null : selectedCategory.getCategoryId());
 
             if (productService.addProduct(product)) {
                 new Alert(Alert.AlertType.INFORMATION, "Product added").show();
@@ -102,6 +128,8 @@ public class ProductFormController implements Initializable {
                     Integer.parseInt(txtQty.getText().trim()),
                     true
             );
+            Category selectedCategory = cmbCategory.getValue();
+            product.setCategoryId(selectedCategory == null ? null : selectedCategory.getCategoryId());
 
             if (productService.updateProduct(product)) {
                 new Alert(Alert.AlertType.INFORMATION, "Product updated").show();
@@ -138,8 +166,7 @@ public class ProductFormController implements Initializable {
     void btnSearchOnAction() {
         try {
             tblProducts.setItems(FXCollections.observableArrayList(
-                    productService.searchProducts(txtSearch.getText())
-            ));
+                    productService.searchProducts(txtSearch.getText())));
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Search failed").show();
         }
@@ -147,6 +174,7 @@ public class ProductFormController implements Initializable {
 
     @FXML
     void btnReloadOnAction() {
+        loadCategories();
         loadTable();
     }
 
@@ -214,6 +242,15 @@ public class ProductFormController implements Initializable {
         }
     }
 
+    private void loadCategories() {
+        try {
+            List<Category> categories = categoryService.getAllCategories();
+            cmbCategory.setItems(FXCollections.observableArrayList(categories));
+        } catch (Exception e) {
+            cmbCategory.setItems(FXCollections.observableArrayList());
+        }
+    }
+
     private void setNextCode() {
         try {
             txtCode.setText(productService.generateNextCode());
@@ -227,6 +264,7 @@ public class ProductFormController implements Initializable {
         txtPrice.clear();
         txtQty.clear();
         txtSearch.clear();
+        cmbCategory.setValue(null);
         tblProducts.getSelectionModel().clearSelection();
     }
 }

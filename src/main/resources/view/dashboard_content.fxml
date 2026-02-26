@@ -40,4 +40,24 @@
             <Label fx:id="lblTodayOrders" text="0" styleClass="kpi-value"/>
         </VBox>
     </GridPane>
+
+    <!-- Analytics Charts Component -->
+    <HBox spacing="14" VBox.vgrow="ALWAYS" alignment="CENTER">
+        <VBox HBox.hgrow="ALWAYS" styleClass="card">
+            <Label text="Sales Last 7 Days" styleClass="panel-title" />
+            <javafx.scene.chart.LineChart fx:id="salesChart" VBox.vgrow="ALWAYS" createSymbols="true" animated="false">
+                <xAxis>
+                    <javafx.scene.chart.CategoryAxis label="Date" />
+                </xAxis>
+                <yAxis>
+                    <javafx.scene.chart.NumberAxis label="Amount (Rs.)" />
+                </yAxis>
+            </javafx.scene.chart.LineChart>
+        </VBox>
+
+        <VBox HBox.hgrow="ALWAYS" styleClass="card">
+            <Label text="Top Selling Products" styleClass="panel-title" />
+            <javafx.scene.chart.PieChart fx:id="topProductsChart" VBox.vgrow="ALWAYS" />
+        </VBox>
+    </HBox>
 </VBox>

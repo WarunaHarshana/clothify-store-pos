@@ -17,9 +17,9 @@ module com.clothify {
     exports com.clothify.controller;
     exports com.clothify.db;
     exports com.clothify.model;
-    exports com.clothify.repository.custom;
-    exports com.clothify.repository.custom.impl;
-    exports com.clothify.service.custom;
-    exports com.clothify.service.custom.impl;
+    exports com.clothify.repository;
+    exports com.clothify.repository.impl;
+    exports com.clothify.service;
+    exports com.clothify.service.impl;
     exports com.clothify.util;
 }

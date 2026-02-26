@@ -1,9 +1,9 @@
-package com.clothify.service.custom.impl;
+package com.clothify.service.impl;
 
 import com.clothify.model.Supplier;
-import com.clothify.repository.custom.SupplierRepository;
-import com.clothify.repository.custom.impl.SupplierRepositoryImpl;
-import com.clothify.service.custom.SupplierService;
+import com.clothify.repository.SupplierRepository;
+import com.clothify.repository.impl.SupplierRepositoryImpl;
+import com.clothify.service.SupplierService;
 
 import java.sql.SQLException;
 import java.util.List;

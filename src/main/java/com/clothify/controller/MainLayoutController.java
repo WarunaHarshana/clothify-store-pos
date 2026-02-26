@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import com.clothify.util.SessionManager;
 
 public class MainLayoutController {
+
+    private static final String ACTIVE_STYLE = "side-btn-active";
 
     @FXML
     private StackPane contentArea;
@@ -21,6 +24,8 @@ public class MainLayoutController {
     private Button navDashboard;
     @FXML
     private Button navProducts;
+    @FXML
+    private Button navCategories;
     @FXML
     private Button navPOS;
     @FXML
@@ -46,6 +51,8 @@ public class MainLayoutController {
             if (!SessionManager.isAdmin()) {
                 navProducts.setVisible(false);
                 navProducts.setManaged(false);
+                navCategories.setVisible(false);
+                navCategories.setManaged(false);
                 navInventory.setVisible(false);
                 navInventory.setManaged(false);
                 navSuppliers.setVisible(false);
@@ -69,6 +76,11 @@ public class MainLayoutController {
     @FXML
     void handleNavProducts() {
         loadPage("/view/product_form.fxml", navProducts);
+    }
+
+    @FXML
+    void handleNavCategories() {
+        loadPage("/view/category_form.fxml", navCategories);
     }
 
     @FXML
@@ -110,8 +122,13 @@ public class MainLayoutController {
     void handleLogout() {
         try {
             SessionManager.clear();
+            java.net.URL resource = getClass().getResource("/view/login_form.fxml");
+            if (resource == null) {
+                new Alert(Alert.AlertType.ERROR, "Login FXML not found").show();
+                return;
+            }
             Stage stage = (Stage) contentArea.getScene().getWindow();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/login_form.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(resource)));
             stage.setMaximized(false);
             stage.setResizable(false);
             stage.centerOnScreen();
@@ -122,19 +139,25 @@ public class MainLayoutController {
 
     private void loadPage(String fxml, Button navBtn) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            java.net.URL resource = getClass().getResource(fxml);
+            if (resource == null) {
+                new Alert(Alert.AlertType.ERROR, "FXML not found: " + fxml).show();
+                return;
+            }
+            Parent root = FXMLLoader.load(resource);
             contentArea.getChildren().setAll(root);
             setActive(navBtn);
         } catch (Exception e) {
             e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to load page: " + fxml + "\n" + e.getMessage()).show();
         }
     }
 
     private void setActive(Button btn) {
         if (active != null)
-            active.getStyleClass().remove("side-btn-active");
-        if (!btn.getStyleClass().contains("side-btn-active"))
-            btn.getStyleClass().add("side-btn-active");
+            active.getStyleClass().remove(ACTIVE_STYLE);
+        if (!btn.getStyleClass().contains(ACTIVE_STYLE))
+            btn.getStyleClass().add(ACTIVE_STYLE);
         active = btn;
     }
 }

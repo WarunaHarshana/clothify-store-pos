@@ -1,4 +1,4 @@
-package com.clothify.service.custom;
+package com.clothify.service;
 
 import com.clothify.model.User;
 
