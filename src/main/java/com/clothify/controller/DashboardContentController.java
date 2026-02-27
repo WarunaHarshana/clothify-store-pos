@@ -1,7 +1,9 @@
 package com.clothify.controller;
 
-import com.clothify.repository.impl.OrderRepositoryImpl;
-import com.clothify.repository.impl.ProductRepositoryImpl;
+import com.clothify.service.OrderService;
+import com.clothify.service.ProductService;
+import com.clothify.service.impl.OrderServiceImpl;
+import com.clothify.service.impl.ProductServiceImpl;
 import com.clothify.util.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,6 +39,9 @@ public class DashboardContentController implements Initializable {
     @FXML
     private PieChart topProductsChart;
 
+    private final ProductService productService = new ProductServiceImpl();
+    private final OrderService orderService = new OrderServiceImpl();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Welcome
@@ -47,34 +52,32 @@ public class DashboardContentController implements Initializable {
 
         // Load KPIs
         try {
-            ProductRepositoryImpl productRepo = new ProductRepositoryImpl();
-            lblTotalProducts.setText(String.valueOf(productRepo.getProductCount()));
-            lblLowStock.setText(String.valueOf(productRepo.getLowStockCount()));
+            lblTotalProducts.setText(String.valueOf(productService.getProductCount()));
+            lblLowStock.setText(String.valueOf(productService.getLowStockCount()));
         } catch (Exception e) {
             lblTotalProducts.setText("--");
             lblLowStock.setText("--");
         }
 
         try {
-            OrderRepositoryImpl orderRepo = new OrderRepositoryImpl();
-            lblTodaySales.setText("Rs. " + String.format("%,.0f", orderRepo.getTodaySalesTotal()));
-            lblTodayOrders.setText(String.valueOf(orderRepo.getTodayOrderCount()));
+            lblTodaySales.setText("Rs. " + String.format("%,.0f", orderService.getTodaySalesTotal()));
+            lblTodayOrders.setText(String.valueOf(orderService.getTodayOrderCount()));
 
             // Charts
-            loadSalesChart(orderRepo);
-            loadTopProductsChart(orderRepo);
+            loadSalesChart();
+            loadTopProductsChart();
         } catch (Exception e) {
             lblTodaySales.setText("Rs. 0");
             lblTodayOrders.setText("0");
         }
     }
 
-    private void loadSalesChart(OrderRepositoryImpl orderRepo) {
+    private void loadSalesChart() {
         try {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName("Sales (Rs.)");
 
-            Map<String, Double> last7Days = orderRepo.getSalesLast7Days();
+            Map<String, Double> last7Days = orderService.getSalesLast7Days();
             for (Map.Entry<String, Double> entry : last7Days.entrySet()) {
                 series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
             }
@@ -86,9 +89,9 @@ public class DashboardContentController implements Initializable {
         }
     }
 
-    private void loadTopProductsChart(OrderRepositoryImpl orderRepo) {
+    private void loadTopProductsChart() {
         try {
-            Map<String, Integer> topProducts = orderRepo.getTopSellingProducts(5);
+            Map<String, Integer> topProducts = orderService.getTopSellingProducts(5);
             topProductsChart.getData().clear();
 
             for (Map.Entry<String, Integer> entry : topProducts.entrySet()) {

@@ -43,7 +43,8 @@ public class ProductServiceImpl implements ProductService {
                 .filter(p -> p.getProductId() == productId)
                 .findFirst()
                 .orElse(null);
-        if (product == null || qty <= 0) return false;
+        if (product == null || qty <= 0)
+            return false;
         return productRepository.updateQuantity(productId, product.getQuantity() + qty);
     }
 
@@ -53,14 +54,26 @@ public class ProductServiceImpl implements ProductService {
                 .filter(p -> p.getProductId() == productId)
                 .findFirst()
                 .orElse(null);
-        if (product == null || qty <= 0) return false;
+        if (product == null || qty <= 0)
+            return false;
         int newQty = product.getQuantity() - qty;
-        if (newQty < 0) return false;
+        if (newQty < 0)
+            return false;
         return productRepository.updateQuantity(productId, newQty);
     }
 
     @Override
     public String generateNextCode() throws SQLException {
         return productRepository.generateNextCode();
+    }
+
+    @Override
+    public int getProductCount() throws SQLException {
+        return productRepository.getProductCount();
+    }
+
+    @Override
+    public int getLowStockCount() throws SQLException {
+        return productRepository.getLowStockCount();
     }
 }

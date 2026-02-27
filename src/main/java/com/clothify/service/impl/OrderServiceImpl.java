@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -25,7 +26,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int placeOrderAndGetId(List<CartItem> cartItems, int cashierUserId) throws SQLException {
-        if (cartItems == null || cartItems.isEmpty()) return -1;
+        if (cartItems == null || cartItems.isEmpty())
+            return -1;
 
         Connection conn;
         try {
@@ -58,8 +60,7 @@ public class OrderServiceImpl implements OrderService {
                         item.getProductName(),
                         item.getQuantity(),
                         item.getUnitPrice(),
-                        item.getLineTotal()
-                ));
+                        item.getLineTotal()));
             }
             orderRepository.saveOrderDetails(conn, details);
 
@@ -102,5 +103,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public double getTodaySalesTotal() throws SQLException {
         return orderRepository.getTodaySalesTotal();
+    }
+
+    @Override
+    public Map<String, Double> getSalesLast7Days() throws SQLException {
+        return orderRepository.getSalesLast7Days();
+    }
+
+    @Override
+    public Map<String, Integer> getTopSellingProducts(int limit) throws SQLException {
+        return orderRepository.getTopSellingProducts(limit);
     }
 }
